@@ -1,0 +1,29 @@
+
+.error {
+    position: relative;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* color: #044154
+ background: url(../../assets/img/roger.webp) no-repeat center bottom, no-repeat center/cover,white;*/
+
+.error h1 {
+    font-size: 50px;
+    color: #4dbdeb;
+}
+
+.error h2 {
+    font-size: 35px;
+    color: #282c34;
+}
+
+.robot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

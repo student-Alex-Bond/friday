@@ -1,0 +1,31 @@
+.nav {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 25px;
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.nav a{
+   color: #282c34;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav  .active {
+    font-weight: bold;
+    color: darkslateblue;
+}
+
+.nav a:hover {
+    color: rosybrown;
+}
+.link{
+    display: flex;
+    width:100vw;
+    justify-content: space-around;
+    padding: 20px 0;
+}
