@@ -16,8 +16,8 @@
 }
 
 .nav  .active {
-    font-weight: bold;
     color: darkslateblue;
+    border-bottom: 3px solid darkslateblue;
 }
 
 .nav a:hover {
