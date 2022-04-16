@@ -1,0 +1,90 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 413px;
+    height: 600px;
+    background: #F9F9FE;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.form h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color: #2D2E46;
+}
+
+.form h2{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    text-align: right;
+    color: #2D2E46;
+    text-transform: capitalize;
+}
+
+.inputPassWrapper{
+    width: 350px;
+}
+.email{
+    width: 350px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid  #24254A;
+    background: #F9F9FE;
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+.label{
+    display: block;
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #24254A;
+    opacity: 0.5;
+}
+
+.form .forgotPass, .dontAcc{
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: #2D2E46;
+}
+
+.form .dontAcc{
+    margin: 40px 0 21px 0;
+}
+
+.forgotWrapper{
+    width: 100%;
+    text-align: end;
+    padding-right: 60px;
+    margin: 20px 0 92px 0;
+}
+
+
+.form .singUp{
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    color: #21268F;
+    text-transform: capitalize;
+}
+
+.btn{
+    width: 266px;
+    height: 36px;
+}

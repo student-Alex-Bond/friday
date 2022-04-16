@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const NewPassword = () => {
-    return (
-        <div>
-            New Password
-        </div>
-    );
-};
+const NewPassword: FC = () => <div>New Password</div>;
 
-export {NewPassword};
+export { NewPassword };

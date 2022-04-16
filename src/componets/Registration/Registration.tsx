@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const Registration = () => {
-    return (
-        <div>
-            registration
-        </div>
-    );
-};
+const Registration: FC = () => <div>registration</div>;
 
-export {Registration};
+export { Registration };
