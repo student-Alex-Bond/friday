@@ -3,7 +3,9 @@ import React, { FC } from 'react';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
+import { FormContainer } from '../../common/FormContainer/FormContainer';
 import { InputPassword } from '../../common/InputPassword/InputPassword';
+import { TextError } from '../../common/TextError/TextError';
 
 import classes from './Login.module.css';
 
@@ -45,7 +47,7 @@ const Login: FC = () => {
     },
   });
   return (
-    <div className={classes.container}>
+    <FormContainer>
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h1>Learn English</h1>
         <h2>sing in</h2>
@@ -60,19 +62,15 @@ const Login: FC = () => {
             className={classes.email}
             placeholder="enter email"
           />
-          <div className={classes.error}>
-            {formik.errors.email && formik.touched.email ? (
-              <div className={classes.errorText}>{formik.errors.email}</div>
-            ) : null}
-          </div>
+          <TextError value={formik.errors.email} touched={formik.touched.email} />
         </div>
         <div className={classes.inputPassWrapper}>
-          <InputPassword name="password" formik={formik} />
-          <div className={classes.error}>
-            {formik.errors.password && formik.touched.password ? (
-              <div className={classes.errorText}>{formik.errors.password}</div>
-            ) : null}
-          </div>
+          <InputPassword
+            name="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+          />
+          <TextError value={formik.errors.password} touched={formik.touched.password} />
         </div>
         <div className={classes.forgotWrapper}>
           <Link className={classes.forgotPass} to="/new-password">
@@ -89,7 +87,7 @@ const Login: FC = () => {
           sing Up
         </Link>
       </form>
-    </div>
+    </FormContainer>
   );
 };
 

@@ -1,0 +1,7 @@
+.error {
+    height: 30px;
+}
+.errorText{
+    color: crimson;
+    font-size: 15px;
+}

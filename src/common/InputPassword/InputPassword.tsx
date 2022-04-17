@@ -1,6 +1,4 @@
-import React, { FC, useState } from 'react';
-
-import { FormikProps } from 'formik/dist/types';
+import React, { ChangeEvent, FC, useState } from 'react';
 
 import eyeClose from '../../assets/eye/eye-close.png';
 import eyeOpen from '../../assets/eye/eye-open.png';
@@ -9,10 +7,11 @@ import classes from './InputPassword.module.css';
 
 type InputPasswordType = {
   name: string;
-  formik: FormikProps<{ email: string; password: string }>;
+  value: string;
+  onChange: (value: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputPassword: FC<InputPasswordType> = ({ name, formik }) => {
+const InputPassword: FC<InputPasswordType> = ({ name, value, onChange }) => {
   const [values, setValue] = useState({
     password: '',
     showPassword: false,
@@ -30,8 +29,8 @@ const InputPassword: FC<InputPasswordType> = ({ name, formik }) => {
       <span className={classes.label}>Password</span>
       <div className={classes.imgWrapper}>
         <input
-          onChange={formik.handleChange}
-          value={formik.values.password}
+          onChange={onChange}
+          value={value}
           name={name}
           autoComplete="true"
           type={typeButton}

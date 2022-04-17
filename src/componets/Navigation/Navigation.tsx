@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
@@ -19,10 +19,10 @@ export const routes = [
   {
     id: 5,
     to: '/password-recovery',
-    component: PasswordRecovery,
+    component: <PasswordRecovery />,
     name: 'PasswordRecovery',
   },
-  { id: 6, to: '/not-found', component: NotFound, name: 'NotFound' },
+  { id: 6, to: '*', component: <NotFound />, name: 'NotFound' },
 ];
 type RoutesType = typeof routes;
 
@@ -30,7 +30,7 @@ type NavigationPropsType = {
   routes: RoutesType;
 };
 
-const Navigation: React.FC<NavigationPropsType> = () => (
+const Navigation: FC<NavigationPropsType> = () => (
   <div className={styles.nav}>
     <div className={styles.link}>
       {routes.map(route => (

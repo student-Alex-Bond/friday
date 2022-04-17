@@ -1,0 +1,72 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+.form  h1 {
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    color: #2D2E46;
+}
+
+.form h2{
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    color: #2D2E46;
+    text-transform: capitalize;
+}
+
+.btnContainer{
+    height: 36px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btnContainer .btnCancel{
+    width: 124px;
+}
+.btnContainer .btnRegistration{
+    width: 187px;
+}
+
+.email{
+    width: 350px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid  #24254A;
+    background: #F9F9FE;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.label{
+    display: block;
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #24254A;
+    opacity: 0.5;
+}
+
+.btnContainer .btnLink{
+    height: 36px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background: #D7D8EF;
+    border-radius: 30px;
+    opacity: 0.8;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    color: #21268F!important;
+    font-size: 16px;
+    text-decoration: none;
+}
