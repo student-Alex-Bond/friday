@@ -44,7 +44,7 @@
     border-bottom: 1px solid  #24254A;
     background: #F9F9FE;
     font-size: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 .label{
     display: block;
@@ -71,7 +71,7 @@
     width: 100%;
     text-align: end;
     padding-right: 60px;
-    margin: 20px 0 92px 0;
+    margin: 10px 0 72px 0;
 }
 
 
@@ -87,4 +87,12 @@
 .btn{
     width: 266px;
     height: 36px;
+}
+
+.error {
+    height: 30px;
+}
+.errorText{
+    color: crimson;
+    font-size: 15px;
 }

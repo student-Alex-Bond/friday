@@ -70,7 +70,9 @@
       {
         "extensions": [
           ".jsx",
-          ".tsx"
+          ".tsx",
+          ".ts",
+          ".js"
         ]
       }
     ],

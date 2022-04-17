@@ -12,10 +12,16 @@ import { Button } from 'common/Button/Button';
 const Login: FC = () => {
   const formik = useFormik({
     validate: values => {
+      const errors = {};
+
+      const passwordLength = 6;
       if (!values.email) {
         return {
           email: 'email is required',
         };
+      }
+      if (!/^[A-Z\d._%+-]+@[A-Z\d.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        return { email: 'Invalid email address' };
       }
 
       if (!values.password) {
@@ -23,12 +29,20 @@ const Login: FC = () => {
           password: 'password is required',
         };
       }
+      if (values.password.length < passwordLength) {
+        return {
+          password: 'Password must be more than 6 characters',
+        };
+      }
+      return errors;
     },
     initialValues: {
       email: '',
       password: '',
     },
-    onSubmit: values => {},
+    onSubmit: values => {
+      alert(JSON.stringify(values, null));
+    },
   });
   return (
     <div className={classes.container}>
@@ -39,14 +53,26 @@ const Login: FC = () => {
         <div>
           <span className={classes.label}>Email</span>
           <input
-            {...formik.getFieldProps('email')}
-            type="email"
+            name="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            type="text"
             className={classes.email}
             placeholder="enter email"
           />
+          <div className={classes.error}>
+            {formik.errors.email && formik.touched.email ? (
+              <div className={classes.errorText}>{formik.errors.email}</div>
+            ) : null}
+          </div>
         </div>
         <div className={classes.inputPassWrapper}>
           <InputPassword name="password" formik={formik} />
+          <div className={classes.error}>
+            {formik.errors.password && formik.touched.password ? (
+              <div className={classes.errorText}>{formik.errors.password}</div>
+            ) : null}
+          </div>
         </div>
         <div className={classes.forgotWrapper}>
           <Link className={classes.forgotPass} to="/new-password">

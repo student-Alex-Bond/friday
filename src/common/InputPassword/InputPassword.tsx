@@ -30,7 +30,8 @@ const InputPassword: FC<InputPasswordType> = ({ name, formik }) => {
       <span className={classes.label}>Password</span>
       <div className={classes.imgWrapper}>
         <input
-          {...formik.getFieldProps('password')}
+          onChange={formik.handleChange}
+          value={formik.values.password}
           name={name}
           autoComplete="true"
           type={typeButton}
