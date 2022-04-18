@@ -15,7 +15,7 @@ const Login: FC = () => {
     validate: values => {
       const errors = {};
 
-      const minPasswordLength = 6;
+      const minPasswordLength = 7;
       if (!values.email) {
         return {
           email: 'email is required',
