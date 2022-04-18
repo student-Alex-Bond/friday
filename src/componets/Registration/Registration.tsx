@@ -3,11 +3,12 @@ import React, { FC } from 'react';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import { Button } from '../../common/Button/Button';
-import { FormContainer } from '../../common/FormContainer/FormContainer';
-import { InputPassword } from '../../common/InputPassword/InputPassword';
-
 import classes from './Registration.module.css';
+
+import { Button } from 'common/Button';
+import { FormContainer } from 'common/FormContainer';
+import { InputPassword } from 'common/InputPassword';
+import { TextError } from 'common/TextError';
 
 const Registration: FC = () => {
   const formik = useFormik({
@@ -34,6 +35,11 @@ const Registration: FC = () => {
           password: 'Password must be more than 6 characters',
         };
       }
+      if (values.password !== values.confirmPassword) {
+        return {
+          confirmPassword: 'passwords do not match',
+        };
+      }
       return errors;
     },
     initialValues: {
@@ -42,7 +48,7 @@ const Registration: FC = () => {
       confirmPassword: '',
     },
     onSubmit: values => {
-      alert(values);
+      alert(JSON.stringify(values, null));
     },
   });
   return (
@@ -50,22 +56,35 @@ const Registration: FC = () => {
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h1>Learn English</h1>
         <h2>Sing Up</h2>
-        <div style={{ marginBottom: '25px' }}>
+        <div style={{ marginBottom: '5px' }}>
           <span className={classes.label}>Email</span>
-          <input type="text" className={classes.email} placeholder="enter email" />
+          <input
+            type="text"
+            className={classes.email}
+            placeholder="enter email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            name="email"
+          />
+          <TextError value={formik.errors.email} touched={formik.touched.email} />
         </div>
-        <div style={{ marginBottom: '25px', width: '100%' }}>
+        <div style={{ marginBottom: '5px', width: '100%' }}>
           <InputPassword
             name="password"
             value={formik.values.password}
             onChange={formik.handleChange}
           />
+          <TextError value={formik.errors.password} touched={formik.touched.password} />
         </div>
-        <div style={{ marginBottom: '65px', width: '100%' }}>
+        <div style={{ marginBottom: '45px', width: '100%' }}>
           <InputPassword
             name="confirmPassword"
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
+          />
+          <TextError
+            value={formik.errors.confirmPassword}
+            touched={formik.touched.confirmPassword}
           />
         </div>
         <div className={classes.btnContainer}>
