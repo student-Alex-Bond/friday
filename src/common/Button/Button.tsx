@@ -1,8 +1,12 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react';
 
 import classes from './Button.module.css';
 
-type ButtonPropsType = {
+type DefaultButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
+type ButtonPropsType = DefaultButtonProps & {
   color: string;
   type: 'submit' | undefined;
 };

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import robot from '../../assets/img/roger.webp';
-
 import styles from './NotFound.module.css';
+
+import robot from 'assets/robot/roger.webp';
 
 const NotFound: FC = () => (
   <div className={styles.error}>

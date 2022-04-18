@@ -13,7 +13,6 @@ type InputPasswordType = {
 
 const InputPassword: FC<InputPasswordType> = ({ name, value, onChange }) => {
   const [values, setValue] = useState({
-    password: '',
     showPassword: false,
   });
 

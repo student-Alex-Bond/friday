@@ -3,20 +3,19 @@ import React, { FC } from 'react';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 
-import { FormContainer } from '../../common/FormContainer/FormContainer';
-import { InputPassword } from '../../common/InputPassword/InputPassword';
-import { TextError } from '../../common/TextError/TextError';
-
 import classes from './Login.module.css';
 
 import { Button } from 'common/Button/Button';
+import { FormContainer } from 'common/FormContainer/FormContainer';
+import { InputPassword } from 'common/InputPassword/InputPassword';
+import { TextError } from 'common/TextError';
 
 const Login: FC = () => {
   const formik = useFormik({
     validate: values => {
       const errors = {};
 
-      const passwordLength = 6;
+      const minPasswordLength = 6;
       if (!values.email) {
         return {
           email: 'email is required',
@@ -31,7 +30,7 @@ const Login: FC = () => {
           password: 'password is required',
         };
       }
-      if (values.password.length < passwordLength) {
+      if (values.password.length < minPasswordLength) {
         return {
           password: 'Password must be more than 6 characters',
         };

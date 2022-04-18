@@ -2,14 +2,15 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
-import { Login } from '../Login/Login';
-import { NewPassword } from '../NewPassword/NewPassword';
-import { NotFound } from '../NotFound/NotFound';
-import { PasswordRecovery } from '../PasswordRecovery/PasswordRecovery';
-import { Profile } from '../Profile/Profile';
-import { Registration } from '../Registration/Registration';
-
 import styles from './Navigation.module.css';
+
+import { Login } from 'componets/Login';
+import { NewPassword } from 'componets/NewPassword';
+import { NotFound } from 'componets/NotFound';
+import { PasswordRecovery } from 'componets/PasswordRecovery';
+import { CheckEmail } from 'componets/PasswordRecovery/CheckEmail';
+import { Profile } from 'componets/Profile';
+import { Registration } from 'componets/Registration';
 
 export const routes = [
   { id: 1, to: '/login', component: <Login />, name: 'Login' },
@@ -47,6 +48,7 @@ const Navigation: FC<NavigationPropsType> = () => (
       {routes.map(route => (
         <Route key={route.id} path={route.to} element={route.component} />
       ))}
+      <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
     </Routes>
   </div>
 );
