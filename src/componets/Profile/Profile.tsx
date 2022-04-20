@@ -1,27 +1,24 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { errorSelector } from './selectors/selectors';
+import { RootState } from '../../store/store';
+import { selectUser } from '../Login/selectors';
 
-import { getUserTC } from 'componets/Login/actions/actions';
+import { UserType } from 'componets/Login/types/types';
 
-const Profile: FC = () => {
+const Profile: FC = memo(() => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const errorMessage = errorSelector;
-  useEffect(() => {
-    dispatch(getUserTC());
-  }, []);
+  const user = useSelector<RootState, UserType | null>(selectUser);
 
   useEffect(() => {
-    if (errorMessage !== null) {
+    if (!user) {
       navigate('/login');
     }
-  }, [errorMessage]);
+  }, [user]);
 
   return <div>Profile</div>;
-};
+});
 
 export { Profile };

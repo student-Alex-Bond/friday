@@ -13,17 +13,16 @@ import { Profile } from 'componets/Profile';
 import { Registration } from 'componets/Registration';
 
 export const routes = [
-  { id: 1, to: '/login', component: <Login />, name: 'Login' },
-  { id: 2, to: '/profile', component: <Profile />, name: 'Profile' },
-  { id: 3, to: '/registration', component: <Registration />, name: 'Registration' },
-  { id: 4, to: '/new-password', component: <NewPassword />, name: 'NewPassword' },
+  { to: '/login', component: <Login />, name: 'Login' },
+  { to: '/profile', component: <Profile />, name: 'Profile' },
+  { to: '/registration', component: <Registration />, name: 'Registration' },
+  { to: '/new-password', component: <NewPassword />, name: 'NewPassword' },
   {
-    id: 5,
     to: '/password-recovery',
     component: <PasswordRecovery />,
     name: 'PasswordRecovery',
   },
-  { id: 6, to: '*', component: <NotFound />, name: 'NotFound' },
+  { to: '*', component: <NotFound />, name: 'NotFound' },
 ];
 type RoutesType = typeof routes;
 
@@ -37,7 +36,7 @@ const Navigation: FC<NavigationPropsType> = () => (
       {routes.map(route => (
         <NavLink
           className={({ isActive }) => (isActive ? `${styles.active}` : ``)}
-          key={route.id}
+          key={route.to}
           to={route.to}
         >
           {route.name}
@@ -46,7 +45,7 @@ const Navigation: FC<NavigationPropsType> = () => (
     </div>
     <Routes>
       {routes.map(route => (
-        <Route key={route.id} path={route.to} element={route.component} />
+        <Route key={route.to} path={route.to} element={route.component} />
       ))}
       <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
     </Routes>
