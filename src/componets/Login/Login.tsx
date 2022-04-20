@@ -32,7 +32,7 @@ const Login: FC = () => {
       }
       if (values.password.length < minPasswordLength) {
         return {
-          password: 'Password must be more than 6 characters',
+          password: 'Password must be more than 7 characters',
         };
       }
       return errors;
