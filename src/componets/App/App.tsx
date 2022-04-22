@@ -1,34 +1,37 @@
 import React, { FC, memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
+import { ErrorBar } from '../../common/ErrorBar/ErrorBar';
 import { getUserTC } from '../Login/actions/actions';
-import { selectUser } from '../Login/selectors';
 import { Navigation, routes } from '../Navigation/Navigation';
 
 import classes from './App.module.css';
 
-import { UserType } from 'componets/Login/types/types';
+import rhombus from 'assets/romb/romb.gif';
 import { RootState } from 'store/store';
 
 const App: FC = memo(() => {
   const dispatch = useDispatch();
-  const user = useSelector<RootState, UserType | null>(selectUser);
-  const navigate = useNavigate();
-
+  const isInitialized = useSelector<RootState, boolean>(state => state.app.isInitialized);
+  const errorMessage = useSelector<RootState, string | null>(
+    state => state.app.errorMessage,
+  );
   useEffect(() => {
     dispatch(getUserTC());
   }, []);
 
-  useEffect(() => {
-    if (user === null) {
-      navigate('/profile');
-    }
-  }, [user]);
+  if (!isInitialized) {
+    return (
+      <div style={{ position: 'fixed', top: '40%', textAlign: 'center', width: '100%' }}>
+        <img src={rhombus} alt="rhombus" />
+      </div>
+    );
+  }
 
   return (
     <div className={classes.container}>
+      {errorMessage && <ErrorBar />}
       <Navigation routes={routes} />
     </div>
   );

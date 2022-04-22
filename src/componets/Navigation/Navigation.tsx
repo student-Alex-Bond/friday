@@ -14,7 +14,7 @@ import { Registration } from 'componets/Registration';
 
 export const routes = [
   { to: '/login', component: <Login />, name: 'Login' },
-  { to: '/profile', component: <Profile />, name: 'Profile' },
+  { to: '/', component: <Profile />, name: 'Profile' },
   { to: '/registration', component: <Registration />, name: 'Registration' },
   { to: '/new-password', component: <NewPassword />, name: 'NewPassword' },
   {

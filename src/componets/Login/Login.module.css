@@ -12,7 +12,7 @@
 
 }
 
-.form  h1 {
+.form h1 {
     text-align: center;
     font-style: normal;
     font-weight: 600;
@@ -21,7 +21,7 @@
     color: #2D2E46;
 }
 
-.form h2{
+.form h2 {
     text-align: center;
     font-style: normal;
     font-weight: 600;
@@ -31,19 +31,21 @@
     text-transform: capitalize;
 }
 
-.inputPassWrapper{
+.inputPassWrapper {
     width: 350px;
 }
-.email{
+
+.email {
     width: 350px;
     outline: none;
     border: none;
-    border-bottom: 1px solid  #24254A;
+    border-bottom: 1px solid #24254A;
     background: #F9F9FE;
     font-size: 20px;
     margin-bottom: 5px;
 }
-.label{
+
+.label {
     display: block;
     font-family: 'SF UI Display', sans-serif;
     font-weight: 400;
@@ -52,7 +54,7 @@
     opacity: 0.5;
 }
 
-.form .forgotPass, .dontAcc{
+.form .forgotPass, .dontAcc {
     font-family: 'SF UI Display', sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -60,21 +62,28 @@
     color: #2D2E46;
 }
 
-.form .dontAcc{
+.form .dontAcc {
     margin: 40px 0 21px 0;
     width: 100%;
     display: block;
 }
 
-.forgotWrapper{
+.forgotWrapper {
     width: 100%;
-    text-align: end;
-    padding-right: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px 0 72px 0;
 }
 
+.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.form .singUp{
+
+.form .singUp {
     width: 100%;
     display: block;
     font-family: 'SF UI Display', sans-serif;
@@ -85,7 +94,7 @@
     text-transform: capitalize;
 }
 
-.btn{
+.btn {
     width: 266px;
     height: 36px;
     margin: 0 auto;

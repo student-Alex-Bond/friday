@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { loginReducer } from '../componets/Login/loginReducer';
@@ -7,14 +8,22 @@ import { passwordReducer } from './passwordReducer';
 
 import { appReducer } from 'componets/App/app-reducer';
 import { profileReducer } from 'componets/Profile/profile-reducer';
+import { registerReducer } from 'componets/Registration/registerReducer';
 
 export const rootReducer = combineReducers({
   login: loginReducer,
   password: passwordReducer,
   app: appReducer,
   profile: profileReducer,
+  register: registerReducer,
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk)),
+);
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+// @ts-ignore
+window.store = store.getState();

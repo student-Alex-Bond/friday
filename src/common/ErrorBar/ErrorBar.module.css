@@ -1,0 +1,22 @@
+.errorMessage {
+    position: absolute;
+    top: 94%;
+    padding: 5px;
+    width: 413px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #F9F9FE;
+}
+
+.btnContainer {
+    position: absolute;
+    top: 10%;
+    right: 2%;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}

@@ -1,8 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { RootState } from '../../store/store';
+
+import { AddedUserType, createUserTC } from './registerReducer';
 import classes from './Registration.module.css';
 
 import { Button } from 'common/Button';
@@ -11,6 +15,18 @@ import { InputPassword } from 'common/InputPassword';
 import { TextError } from 'common/TextError';
 
 const Registration: FC = () => {
+  const dispatch = useDispatch();
+  const addedUser = useSelector<RootState, AddedUserType | null>(
+    state => state.register.addedUser,
+  );
+  const error = useSelector<RootState, string | null>(state => state.register.error);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (addedUser !== null) {
+      navigate('/login');
+    }
+  }, [addedUser]);
+
   const formik = useFormik({
     validate: values => {
       const errors = {};
@@ -48,7 +64,8 @@ const Registration: FC = () => {
       confirmPassword: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null));
+      const newUser = { email: values.email, password: values.password };
+      dispatch(createUserTC(newUser));
     },
   });
   return (
@@ -98,6 +115,9 @@ const Registration: FC = () => {
               Registration
             </Button>
           </div>
+        </div>
+        <div style={{ marginTop: '20px', color: 'red' }}>
+          {error && <div>{error}</div>}
         </div>
       </form>
     </FormContainer>

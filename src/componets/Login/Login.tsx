@@ -1,16 +1,30 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { RootState } from '../../store/store';
+
+import { loginUserTC, LoginUserType } from './actions/actions';
 import classes from './Login.module.css';
+import { selectUser } from './selectors';
+import { UserType } from './types/types';
 
 import { Button } from 'common/Button/Button';
 import { FormContainer } from 'common/FormContainer/FormContainer';
 import { InputPassword } from 'common/InputPassword/InputPassword';
 import { TextError } from 'common/TextError';
 
-const Login: FC = () => {
+const Login: FC = memo(() => {
+  const user = useSelector<RootState, UserType | null>(selectUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user !== null) {
+      navigate('/');
+    }
+  }, [user]);
   const formik = useFormik({
     validate: values => {
       const errors = {};
@@ -40,9 +54,15 @@ const Login: FC = () => {
     initialValues: {
       email: '',
       password: '',
+      rememberMe: 'false',
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null));
+      const currentUser: LoginUserType = {
+        email: values.email,
+        password: values.password,
+        rememberMe: values.rememberMe !== 'false',
+      };
+      dispatch(loginUserTC(currentUser));
     },
   });
   return (
@@ -72,6 +92,15 @@ const Login: FC = () => {
           <TextError value={formik.errors.password} touched={formik.touched.password} />
         </div>
         <div className={classes.forgotWrapper}>
+          <div className={classes.checkbox}>
+            <input
+              name="rememberMe"
+              value={formik.values.rememberMe}
+              type="checkbox"
+              onChange={formik.handleChange}
+            />
+            <span className={classes.label}>Remember Me</span>
+          </div>
           <Link className={classes.forgotPass} to="/new-password">
             Forgot Password
           </Link>
@@ -88,6 +117,6 @@ const Login: FC = () => {
       </form>
     </FormContainer>
   );
-};
+});
 
 export { Login };
