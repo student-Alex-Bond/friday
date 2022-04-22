@@ -19,7 +19,6 @@ const Registration: FC = () => {
   const addedUser = useSelector<RootState, AddedUserType | null>(
     state => state.register.addedUser,
   );
-  const error = useSelector<RootState, string | null>(state => state.register.error);
   const navigate = useNavigate();
   useEffect(() => {
     if (addedUser !== null) {
@@ -115,9 +114,6 @@ const Registration: FC = () => {
               Registration
             </Button>
           </div>
-        </div>
-        <div style={{ marginTop: '20px', color: 'red' }}>
-          {error && <div>{error}</div>}
         </div>
       </form>
     </FormContainer>

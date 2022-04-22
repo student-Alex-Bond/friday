@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { RootState } from '../../store/store';
-import { logoutTC } from '../Login/actions/actions';
+import { logoutTC } from '../Login/actions';
 import { selectUser } from '../Login/selectors';
 
-import { UserType } from 'componets/Login/types/types';
+import { UserType } from 'componets/Login/types';
 
 const Profile: FC = memo(() => {
   const dispatch = useDispatch();

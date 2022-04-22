@@ -3,14 +3,14 @@ import { Dispatch } from 'react';
 import { authApi } from '../../api/cards-api';
 import { newUserType } from '../../api/types';
 
+import { setError, SetErrorType } from 'componets/App/app-reducer';
+
 const initialState: InitialStateType = {
   addedUser: null,
-  error: null,
 };
 
 type InitialStateType = {
   addedUser: AddedUserType | null;
-  error: string | null;
 };
 
 export type AddedUserType = {
@@ -19,9 +19,8 @@ export type AddedUserType = {
 };
 
 const ADDED_USER = 'register/ADDED-USER';
-const SET_ERROR = 'register/SET_ERROR';
 
-type ActionType = ReturnType<typeof addedUser> | ReturnType<typeof setError>;
+type ActionType = ReturnType<typeof addedUser> | SetErrorType;
 
 export const registerReducer = (
   state: InitialStateType = initialState,
@@ -31,9 +30,6 @@ export const registerReducer = (
     case ADDED_USER: {
       return { ...state, addedUser: action.payload };
     }
-    case SET_ERROR: {
-      return { ...state, error: action.payload };
-    }
     default:
       return state;
   }
@@ -41,9 +37,6 @@ export const registerReducer = (
 
 export const addedUser = (newUser: newUserType) =>
   ({ type: ADDED_USER, payload: newUser } as const);
-
-export const setError = (error: string | null) =>
-  ({ type: SET_ERROR, payload: error } as const);
 
 export const createUserTC =
   (newUser: newUserType) => (dispatch: Dispatch<ActionType>) => {

@@ -2,12 +2,12 @@ import { Dispatch } from 'react';
 
 import axios from 'axios';
 
-import { authApi } from '../../../api/cards-api';
-import { isInitialized, setError } from '../../App/app-reducer';
-import { ActionsType, UserType } from '../types/types';
+import { authApi } from '../../api/cards-api';
+import { isInitialized, setAppStatus, setError, setMessage } from '../App/app-reducer';
+
+import { ActionsType, UserType } from './types';
 
 export const SET_USER = 'login/SET-USER';
-export const SET_MESSAGE = 'login/SET-MESSAGE';
 
 export const setUser = (user: UserType | null) =>
   ({
@@ -15,21 +15,27 @@ export const setUser = (user: UserType | null) =>
     payload: user,
   } as const);
 
-export const setMessage = (message: string | null) =>
-  ({ type: SET_MESSAGE, payload: message } as const);
-
 export const getUserTC = () => (dispatch: Dispatch<ActionsType>) => {
+  dispatch(setAppStatus('loading'));
   authApi
     .me()
     .then(res => {
       dispatch(setUser(res.data));
       dispatch(isInitialized(true));
+      dispatch(setAppStatus('succeeded'));
     })
     .catch(error => {
+      // axios.isAxiosError(error) && error.response это ошибки самого axios происходят когда сервер живой
       if (axios.isAxiosError(error) && error.response) {
         dispatch(setError(error.response.data.error));
         dispatch(isInitialized(true));
+        dispatch(setAppStatus('failed'));
+        return;
       }
+      // это ошибки когда нет связи с сервером
+      dispatch(setError(error.message));
+      dispatch(isInitialized(true));
+      dispatch(setAppStatus('failed'));
     });
 };
 
@@ -40,32 +46,38 @@ export type LoginUserType = {
 };
 
 export const loginUserTC = (user: LoginUserType) => (dispatch: Dispatch<ActionsType>) => {
+  dispatch(setAppStatus('loading'));
   authApi
     .login(user)
     .then(response => {
       dispatch(setUser(response.data));
       dispatch(setError(null));
       dispatch(setMessage(response.statusText));
+      dispatch(setAppStatus('succeeded'));
     })
     .catch(e => {
       const error = e.response
         ? e.response.data.error
         : `${e.message}, more details in the console`;
       dispatch(setError(error));
+      dispatch(setAppStatus('failed'));
     });
 };
 
 export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+  dispatch(setAppStatus('loading'));
   authApi
     .logout()
     .then(response => {
       dispatch(setUser(null));
       dispatch(setMessage(response.data.info));
+      dispatch(setAppStatus('succeeded'));
     })
     .catch(e => {
       const error = e.response
         ? e.response.data.error
         : `${e.message}, more details in the console`;
       dispatch(setError(error));
+      dispatch(setAppStatus('failed'));
     });
 };

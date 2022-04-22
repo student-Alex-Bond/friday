@@ -3,7 +3,7 @@ import React, { FC, memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ErrorBar } from '../../common/ErrorBar/ErrorBar';
-import { getUserTC } from '../Login/actions/actions';
+import { getUserTC } from '../Login/actions';
 import { Navigation, routes } from '../Navigation/Navigation';
 
 import classes from './App.module.css';

@@ -6,17 +6,19 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { RootState } from '../../store/store';
 
-import { loginUserTC, LoginUserType } from './actions/actions';
+import { loginUserTC, LoginUserType } from './actions';
 import classes from './Login.module.css';
 import { selectUser } from './selectors';
-import { UserType } from './types/types';
+import { UserType } from './types';
 
+import rocket from 'assets/preloader/preloader.gif';
 import { Button } from 'common/Button/Button';
 import { FormContainer } from 'common/FormContainer/FormContainer';
 import { InputPassword } from 'common/InputPassword/InputPassword';
 import { TextError } from 'common/TextError';
 
 const Login: FC = memo(() => {
+  const status = useSelector<RootState, string | null>(state => state.app.status);
   const user = useSelector<RootState, UserType | null>(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,6 +72,7 @@ const Login: FC = memo(() => {
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h1>Learn English</h1>
         <h2>sing in</h2>
+        {status === 'loading' && <img src={rocket} alt="rocket" />}
         <div />
         <div>
           <span className={classes.label}>Email</span>

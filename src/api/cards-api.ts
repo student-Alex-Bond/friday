@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { LoginUserType } from '../componets/Login/actions/actions';
+import { LoginUserType } from '../componets/Login/actions';
 
 import { newUserType } from './types';
 
