@@ -50,13 +50,15 @@ const PersonalInfo: FC = () => {
             value={formik.values.email}
           />
         </label>
-        <div className={classes.btnCancel}>
-          <Link to="/profile">Cancel</Link>
-        </div>
-        <div className={classes.btn}>
-          <Button color="#21268F" type="submit">
-            Save
-          </Button>
+        <div className={classes.btnWrapper}>
+          <div className={classes.btnCancel}>
+            <Link to="/">Cancel</Link>
+          </div>
+          <div className={classes.btn}>
+            <Button color="#21268F" type="submit">
+              Save
+            </Button>
+          </div>
         </div>
       </form>
     </FormContainer>
