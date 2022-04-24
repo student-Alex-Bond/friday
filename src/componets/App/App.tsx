@@ -9,6 +9,7 @@ import { Navigation, routes } from '../Navigation/Navigation';
 import classes from './App.module.css';
 
 import rhombus from 'assets/romb/romb.gif';
+import { PopupWindow } from 'common/popupWindow/PopupWindow';
 import { RootState } from 'store/store';
 
 const App: FC = memo(() => {
@@ -17,6 +18,7 @@ const App: FC = memo(() => {
   const errorMessage = useSelector<RootState, string | null>(
     state => state.app.errorMessage,
   );
+  const message = useSelector<RootState, string | null>(state => state.app.message);
   useEffect(() => {
     dispatch(getUserTC());
   }, []);
@@ -32,6 +34,7 @@ const App: FC = memo(() => {
   return (
     <div className={classes.container}>
       {errorMessage && <ErrorBar />}
+      {message && <PopupWindow />}
       <Navigation routes={routes} />
     </div>
   );
