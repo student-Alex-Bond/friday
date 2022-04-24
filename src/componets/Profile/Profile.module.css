@@ -1,0 +1,65 @@
+.profileContainer {
+    width: 1008px;
+    height: 636px;
+    display: flex;
+    position: relative;
+    background: #ECECF9;
+    border-radius: 5px;
+
+}
+
+.userContainer {
+    width: 243px;
+    height:100%;
+    background: #D9D9F1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.avatar {
+    margin-top: 24px;
+    width: 96px;
+    height: 96px;
+}
+
+.name {
+    margin: 5px 0;
+    font-weight: 600;
+    font-size: 18px;
+    color: #2D2E46;
+
+}
+
+.professional {
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    color: #2D2E46;
+    opacity: 0.5;
+    margin: 10px 0;
+}
+
+.editProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: #21268F!important;
+    border: 1px solid #635D80;
+    border-radius: 2px;
+    background: #D9D9F1;
+    width: 75px;
+    height: 24px;
+
+}
+
+.logout {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+}

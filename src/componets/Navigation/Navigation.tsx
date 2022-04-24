@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import { PersonalInfo } from '../Profile/PersonalInfo/PersonalInfo';
+
 import styles from './Navigation.module.css';
 
 import { Login } from 'componets/Login';
@@ -48,6 +50,7 @@ const Navigation: FC<NavigationPropsType> = () => (
         <Route key={route.to} path={route.to} element={route.component} />
       ))}
       <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
+      <Route key={8} path="profile/personal-info" element={<PersonalInfo />} />
     </Routes>
   </div>
 );

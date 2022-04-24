@@ -11,7 +11,7 @@ const PopupWindow: FC = () => {
   const message = useSelector<RootState, string | null>(state => state.app.message);
   const dispatch = useDispatch();
 
-  const windowDisplayTime = 3000;
+  const windowDisplayTime = 6000;
 
   useEffect(() => {
     const IntervalID = setTimeout(() => {
