@@ -1,6 +1,11 @@
-import { isInitializedType, SetAppStatusType, SetErrorType, SetMessageType } from '../App/app-reducer';
+import {
+  isInitializedType,
+  SetAppStatusType,
+  SetErrorType,
+  SetMessageType,
+} from '../App/app-reducer';
 
-import { setUser } from './actions';
+import { changePersonalInfo, setUser } from './actions';
 
 export type UserType = {
   _id: string;
@@ -23,10 +28,12 @@ export type InitialStateType = {
 };
 
 type SetUserType = ReturnType<typeof setUser>;
+type ChangeUserName = ReturnType<typeof changePersonalInfo>;
 
 export type ActionsType =
   | SetUserType
   | isInitializedType
   | SetMessageType
   | SetErrorType
-  | SetAppStatusType;
+  | SetAppStatusType
+  | ChangeUserName;

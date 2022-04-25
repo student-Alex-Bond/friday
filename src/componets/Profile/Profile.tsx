@@ -16,10 +16,15 @@ const Profile: FC = memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector<RootState, UserType | null>(selectUser);
+  const currentAvatar = useSelector<RootState, string | undefined>(
+    state => state.login.user?.avatar,
+  );
   let userName = 'Ivan Ivanov';
   if (user) {
     userName = user.name;
   }
+
+  const avatar = currentAvatar || ava;
 
   const logout = (): void => {
     dispatch(logoutTC());
@@ -37,7 +42,7 @@ const Profile: FC = memo(() => {
         logout
       </button>
       <div className={classes.userContainer}>
-        <img className={classes.avatar} src={ava} alt="avatar" />
+        <img className={classes.avatar} src={avatar} alt="avatar" />
         <h1 className={classes.name}>{userName}</h1>
         <span className={classes.professional}>Front-end Developer</span>
         <Link to="profile/personal-info" type="button" className={classes.editProfile}>

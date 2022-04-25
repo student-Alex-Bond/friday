@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { FormContainer } from '../../../common/FormContainer';
+import { changePersonalInfoTC } from '../../Login/actions';
 
 import classes from './PersonalInfo.module.css';
 
@@ -12,13 +14,17 @@ import changePhoto from 'assets/changePhoto/changePhoto.svg';
 import { Button } from 'common/Button';
 
 const PersonalInfo: FC = () => {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      nick: '',
-      email: '',
+      name: '',
+      avatar: '',
     },
-    onSubmit: values => alert(values),
+    onSubmit: values => {
+      dispatch(changePersonalInfoTC(values));
+    },
   });
+
   return (
     <FormContainer>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
@@ -26,28 +32,35 @@ const PersonalInfo: FC = () => {
         <div className={classes.avatar}>
           <img src={ava} alt="avatar" />
           <label htmlFor="changePhoto" className={classes.changePhoto}>
-            <input type="file" id="changePhoto" />
+            <input
+              name="avatar"
+              type="file"
+              id="changePhoto"
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                const firstFileInArray = 0;
+                if (event.currentTarget.files) {
+                  const file = event.currentTarget.files[firstFileInArray];
+                  const reader = new FileReader();
+                  reader.onloadend = function () {
+                    formik.setFieldValue('avatar', reader.result);
+                  };
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
             <img src={changePhoto} alt="photos" />
           </label>
         </div>
-        <label htmlFor="nick">
+        <label htmlFor="nick" className={classes.label}>
           Nick name
           <input
+            className={classes.input}
             id="nick"
             type="text"
-            name="nick"
+            name="name"
             onChange={formik.handleChange}
-            value={formik.values.nick}
-          />
-        </label>
-        <label htmlFor="email">
-          Email
-          <input
-            id="email"
-            type="text"
-            name="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.name}
+            placeholder="Enter your nick"
           />
         </label>
         <div className={classes.btnWrapper}>

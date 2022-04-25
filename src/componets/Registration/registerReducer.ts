@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
 import { authApi } from '../../api/cards-api';
-import { newUserType } from '../../api/types';
+import { NewUserType } from '../../api/types';
 
 import { setError, SetErrorType } from 'componets/App/app-reducer';
 
@@ -35,11 +35,11 @@ export const registerReducer = (
   }
 };
 
-export const addedUser = (newUser: newUserType) =>
+export const addedUser = (newUser: NewUserType) =>
   ({ type: ADDED_USER, payload: newUser } as const);
 
 export const createUserTC =
-  (newUser: newUserType) => (dispatch: Dispatch<ActionType>) => {
+  (newUser: NewUserType) => (dispatch: Dispatch<ActionType>) => {
     authApi
       .register(newUser)
       .then(response => {

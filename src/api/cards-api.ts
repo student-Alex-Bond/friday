@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { LoginUserType } from '../componets/Login/actions';
 
-import { newUserType } from './types';
+import { NewUserType, UpdateUserType } from './types';
 
 const instance = axios.create({
   baseURL: 'http://localhost:7542/2.0/' || process.env.REACT_APP_BACK_URL,
@@ -13,7 +13,7 @@ export const authApi = {
   me() {
     return instance.post('/auth/me', {});
   },
-  register(newUser: newUserType) {
+  register(newUser: NewUserType) {
     return instance.post('/auth/register', newUser);
   },
   login(user: LoginUserType) {
@@ -21,5 +21,8 @@ export const authApi = {
   },
   logout() {
     return instance.delete('/auth/me', {});
+  },
+  updateUser(data: UpdateUserType) {
+    return instance.put('/auth/me', data);
   },
 };
