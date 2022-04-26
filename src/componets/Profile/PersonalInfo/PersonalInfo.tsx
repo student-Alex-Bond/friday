@@ -1,10 +1,11 @@
 import React, { ChangeEvent, FC } from 'react';
 
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { FormContainer } from '../../../common/FormContainer';
+import { RootState } from '../../../store/store';
 import { changePersonalInfoTC } from '../../Login/actions';
 
 import classes from './PersonalInfo.module.css';
@@ -15,6 +16,10 @@ import { Button } from 'common/Button';
 
 const PersonalInfo: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentAvatar = useSelector<RootState, string | undefined>(
+    state => state.login.user?.avatar,
+  );
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -22,15 +27,18 @@ const PersonalInfo: FC = () => {
     },
     onSubmit: values => {
       dispatch(changePersonalInfoTC(values));
+      navigate('/');
     },
   });
+
+  const avatar = currentAvatar || ava;
 
   return (
     <FormContainer>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
         <h1 className={classes.title}>Personal Information</h1>
         <div className={classes.avatar}>
-          <img src={ava} alt="avatar" />
+          <img src={avatar} alt="avatar" />
           <label htmlFor="changePhoto" className={classes.changePhoto}>
             <input
               name="avatar"
@@ -41,7 +49,7 @@ const PersonalInfo: FC = () => {
                 if (event.currentTarget.files) {
                   const file = event.currentTarget.files[firstFileInArray];
                   const reader = new FileReader();
-                  reader.onloadend = function () {
+                  reader.onloadend = function setPhoto() {
                     formik.setFieldValue('avatar', reader.result);
                   };
                   reader.readAsDataURL(file);

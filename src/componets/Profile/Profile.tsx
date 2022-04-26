@@ -3,6 +3,8 @@ import React, { FC, memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import LeftContainer from '../../common/LeftContainer/LeftContainer';
+import { MainContainer } from '../../common/MainContainer/MainContainer';
 import { RootState } from '../../store/store';
 import { logoutTC } from '../Login/actions';
 import { selectUser } from '../Login/selectors';
@@ -37,19 +39,19 @@ const Profile: FC = memo(() => {
   }, [user]);
 
   return (
-    <div className={classes.profileContainer}>
+    <MainContainer>
       <button className={classes.logout} type="button" onClick={logout}>
         logout
       </button>
-      <div className={classes.userContainer}>
+      <LeftContainer>
         <img className={classes.avatar} src={avatar} alt="avatar" />
         <h1 className={classes.name}>{userName}</h1>
         <span className={classes.professional}>Front-end Developer</span>
         <Link to="profile/personal-info" type="button" className={classes.editProfile}>
           Edit profile
         </Link>
-      </div>
-    </div>
+      </LeftContainer>
+    </MainContainer>
   );
 });
 

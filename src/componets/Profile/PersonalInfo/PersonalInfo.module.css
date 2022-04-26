@@ -8,11 +8,13 @@
 .avatar {
     position: relative;
     margin: 50px 0;
+
 }
 
 .avatar img {
     width: 96px;
     height: 96px;
+    border-radius: 50%;
 }
 
 .title {
