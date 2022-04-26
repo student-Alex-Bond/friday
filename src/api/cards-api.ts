@@ -26,3 +26,9 @@ export const authApi = {
     return instance.put('/auth/me', data);
   },
 };
+
+export const cardsApi = {
+  getCards() {
+    return instance.get('/cards/pack');
+  },
+};

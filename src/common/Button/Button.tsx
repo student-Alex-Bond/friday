@@ -12,7 +12,14 @@ type ButtonPropsType = DefaultButtonProps & {
 };
 
 const Button: FC<ButtonPropsType> = ({ children, color, type }) => (
-  <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+  <div
+    style={{
+      display: 'flex',
+      height: '100%',
+      width: '100%',
+      backgroundColor: 'transparent',
+    }}
+  >
     <button
       type={type ? 'submit' : 'button'}
       style={{ backgroundColor: color }}

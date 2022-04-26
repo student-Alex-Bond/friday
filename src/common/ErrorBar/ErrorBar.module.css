@@ -3,10 +3,11 @@
     position: absolute;
     top: 94%;
     padding: 5px 40px 5px 10px;
-
+    color: red;
     border-radius: 8px;
     text-align: center;
     background-color: #F9F9FE;
+    font-weight: bold;
 }
 
 .btnContainer {

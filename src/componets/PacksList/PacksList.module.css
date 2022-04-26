@@ -34,6 +34,9 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
+
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .packsListContainer .title {
@@ -45,7 +48,7 @@
     margin: 0 0 20px 0;
 
 }
-.packsListContainer .btn{
+.packsListContainer .btnAdd{
     height: 36px;
     width: 184px;
     background-color: transparent;
@@ -54,9 +57,31 @@
 .blockSearch{
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .search{
     width: 461px;
     height: 36px;
+}
+
+.tableHeader{
+    padding: 0 30px;
+    height: 48px;
+    width: 100%;
+    background: #ECECF9;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tableHeader > div {
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #2D2E46;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }

@@ -72,8 +72,11 @@ const Login: FC = memo(() => {
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h1>Learn English</h1>
         <h2>sing in</h2>
-        {status === 'loading' && <img src={rocket} alt="rocket" />}
+        <div style={{ height: '64px' }}>
+          {status === 'loading' && <img src={rocket} alt="rocket" />}
+        </div>
         <div />
+        <span style={{ fontSize: '12px' }}>1qazxcvBG</span>
         <div>
           <span className={classes.label}>Email</span>
           <input

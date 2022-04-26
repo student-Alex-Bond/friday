@@ -27,6 +27,7 @@ export const changePersonalInfoTC =
       .updateUser(changedInfo)
       .then(response => {
         dispatch(changePersonalInfo(response.data.updatedUser));
+        dispatch(setMessage(response.statusText));
         dispatch(setAppStatus('succeeded'));
       })
       .catch(e => {

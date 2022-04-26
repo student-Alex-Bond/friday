@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { ChangeEvent, FC, useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,17 +6,23 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { FormContainer } from '../../../common/FormContainer';
 import { RootState } from '../../../store/store';
+import { setMessage } from '../../App/app-reducer';
 import { changePersonalInfoTC } from '../../Login/actions';
 
 import classes from './PersonalInfo.module.css';
 
 import ava from 'assets/avatar/avatar-svgrepo-com.svg';
 import changePhoto from 'assets/changePhoto/changePhoto.svg';
+import rocket from 'assets/preloader/preloader.gif';
 import { Button } from 'common/Button';
 
 const PersonalInfo: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const status = useSelector<RootState, string>(state => state.app.status);
+  const name = useSelector<RootState, string | undefined>(
+    state => state.login.user?.name,
+  );
   const currentAvatar = useSelector<RootState, string | undefined>(
     state => state.login.user?.avatar,
   );
@@ -27,9 +33,14 @@ const PersonalInfo: FC = () => {
     },
     onSubmit: values => {
       dispatch(changePersonalInfoTC(values));
-      navigate('/');
     },
   });
+
+  useEffect(() => {
+    if (name === formik.values.name || currentAvatar === formik.values.avatar) {
+      navigate('/');
+    }
+  }, [name, currentAvatar]);
 
   const avatar = currentAvatar || ava;
 
@@ -37,6 +48,9 @@ const PersonalInfo: FC = () => {
     <FormContainer>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
         <h1 className={classes.title}>Personal Information</h1>
+        <div style={{ height: '64px' }}>
+          {status === 'loading' && <img src={rocket} alt="rocket" />}
+        </div>
         <div className={classes.avatar}>
           <img src={avatar} alt="avatar" />
           <label htmlFor="changePhoto" className={classes.changePhoto}>
@@ -51,6 +65,7 @@ const PersonalInfo: FC = () => {
                   const reader = new FileReader();
                   reader.onloadend = function setPhotoInFormatBase64() {
                     formik.setFieldValue('avatar', reader.result);
+                    dispatch(setMessage('photo download'));
                   };
                   reader.readAsDataURL(file);
                 }
