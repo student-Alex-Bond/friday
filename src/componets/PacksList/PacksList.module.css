@@ -1,0 +1,62 @@
+.title {
+    font-family: 'SF UI Display', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #2D2E46;
+    margin-bottom: 35px;
+}
+
+.btn {
+    height: 36px;
+    width: 100px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #ECECF9;
+    cursor: pointer;
+}
+
+.btnContainer {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.text {
+    margin-bottom: 50px;
+    font-family: 'SF UI Display', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #2D2E46;
+}
+
+.packsListContainer {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.packsListContainer .title {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    color: #2D2E46;
+    margin: 0 0 20px 0;
+
+}
+.packsListContainer .btn{
+    height: 36px;
+    width: 184px;
+    background-color: transparent;
+}
+
+.blockSearch{
+    display: flex;
+    align-items: center;
+}
+
+.search{
+    width: 461px;
+    height: 36px;
+}

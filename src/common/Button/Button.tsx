@@ -12,13 +12,15 @@ type ButtonPropsType = DefaultButtonProps & {
 };
 
 const Button: FC<ButtonPropsType> = ({ children, color, type }) => (
-  <button
-    type={type ? 'submit' : 'button'}
-    style={{ backgroundColor: color }}
-    className={classes.btn}
-  >
-    {children}
-  </button>
+  <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+    <button
+      type={type ? 'submit' : 'button'}
+      style={{ backgroundColor: color }}
+      className={classes.btn}
+    >
+      {children}
+    </button>
+  </div>
 );
 
 export { Button };

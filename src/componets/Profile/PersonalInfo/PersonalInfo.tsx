@@ -49,7 +49,7 @@ const PersonalInfo: FC = () => {
                 if (event.currentTarget.files) {
                   const file = event.currentTarget.files[firstFileInArray];
                   const reader = new FileReader();
-                  reader.onloadend = function setPhoto() {
+                  reader.onloadend = function setPhotoInFormatBase64() {
                     formik.setFieldValue('avatar', reader.result);
                   };
                   reader.readAsDataURL(file);

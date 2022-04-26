@@ -1,0 +1,34 @@
+import * as React from 'react';
+import { FC } from 'react';
+
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
+function valuetext(value: number): string {
+  return String(value);
+}
+
+const RangeSlider: FC = () => {
+  const startValue = 4;
+  const endValue = 112;
+  const [value, setValue] = React.useState<number[]>([startValue, endValue]);
+
+  const handleChange = (event: Event, newValue: number | number[]): void => {
+    setValue(newValue as number[]);
+  };
+
+  return (
+    <Box sx={{ width: 180 }}>
+      <Slider
+        getAriaLabel={() => 'Number of cards in a deck'}
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        max={150}
+      />
+    </Box>
+  );
+};
+
+export { RangeSlider };

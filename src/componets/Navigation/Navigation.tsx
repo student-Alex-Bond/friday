@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import PacksList from '../PacksList/PacksList';
 import { PersonalInfo } from '../Profile/PersonalInfo/PersonalInfo';
 
 import styles from './Navigation.module.css';
@@ -19,6 +20,7 @@ export const routes = [
   { to: '/', component: <Profile />, name: 'Profile' },
   { to: '/registration', component: <Registration />, name: 'Registration' },
   { to: '/new-password', component: <NewPassword />, name: 'NewPassword' },
+  { to: '/packs-list', component: <PacksList />, name: 'PacksList' },
   {
     to: '/password-recovery',
     component: <PasswordRecovery />,
