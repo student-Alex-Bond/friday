@@ -7,20 +7,6 @@
     margin-bottom: 35px;
 }
 
-.btn {
-    height: 36px;
-    width: 100px;
-    background: #FFFFFF;
-    border-radius: 2px;
-    border: 1px solid #ECECF9;
-    cursor: pointer;
-}
-
-.btnContainer {
-    display: flex;
-    margin-bottom: 30px;
-}
-
 .text {
     margin-bottom: 50px;
     font-family: 'SF UI Display', sans-serif;

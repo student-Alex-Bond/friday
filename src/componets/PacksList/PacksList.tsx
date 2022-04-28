@@ -13,6 +13,7 @@ import { RootState } from '../../store/store';
 import { PackItem } from './PackItem/PackItem';
 import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC } from './packsReducer';
+import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPacks';
 
 import { Button } from 'common/Button';
 
@@ -31,14 +32,7 @@ const PacksList: FC = () => {
     <MainContainer>
       <LeftContainer>
         <h2 className={classes.title}>Show packs cards</h2>
-        <div className={classes.btnContainer}>
-          <button type="button" className={classes.btn}>
-            My
-          </button>
-          <button type="button" className={classes.btn}>
-            All
-          </button>
-        </div>
+        <PrivateOrPublicPacks />
         <span className={classes.text}>Number of cards</span>
         <div className={classes.range}>
           <RangeSlider />

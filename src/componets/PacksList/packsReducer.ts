@@ -23,6 +23,7 @@ export type queryParamsType = {
   minMaxContCards: number[];
   currentPage: number;
   pageCount: number;
+  haveID: string | undefined;
 };
 
 const firstNumber = 0;
@@ -33,6 +34,7 @@ export const initialState = {
     minMaxContCards: [firstNumber, lastNumber],
     currentPage: 1,
     pageCount: 4,
+    haveID: undefined,
   },
 };
 
@@ -40,6 +42,7 @@ export const GET_PACKS = 'packs/GET-PACKS';
 export const SET_MIN_MAX_COUNT_CARDS = 'packs/SET-MIN-MAX-COUNT-CARDS';
 export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
+export const SET_MY_ID = 'packs/SET-MY-ID';
 
 export type InitialStateType = {
   cardsPacks: CardsPackType[];
@@ -49,12 +52,14 @@ export type GetPacksType = ReturnType<typeof getPacks>;
 export type SetMinMaxContCardsType = ReturnType<typeof setMinMaxContCards>;
 export type SetPageCountType = ReturnType<typeof setPageCount>;
 export type setCurrentPageType = ReturnType<typeof setCurrentPage>;
+export type SetMyIdType = ReturnType<typeof setMyId>;
 export type ActionsType =
   | GetPacksType
   | SetMessageType
   | SetMinMaxContCardsType
   | SetPageCountType
-  | setCurrentPageType;
+  | setCurrentPageType
+  | SetMyIdType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -78,6 +83,11 @@ export const packsReducer = (
       };
     case GET_PACKS:
       return { ...state, cardsPacks: action.payload.packs };
+    case SET_MY_ID:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, haveID: action.payload.myID },
+      };
     default:
       return state;
   }
@@ -96,6 +106,9 @@ export const setPageCount = (pageCount: number) =>
 
 export const setCurrentPage = (currentPage: number) =>
   ({ type: SET_CURRENT_PAGE, payload: { currentPage } } as const);
+
+export const setMyId = (myID: string | undefined) =>
+  ({ type: SET_MY_ID, payload: { myID } } as const);
 
 export const getPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
   cardsApi.getCards().then(response => {

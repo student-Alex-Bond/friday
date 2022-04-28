@@ -1,0 +1,19 @@
+.btn {
+    height: 36px;
+    width: 100px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #ECECF9;
+    cursor: pointer;
+}
+
+.btnContainer {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.btnActive{
+    background: #9A91C8;
+    border-radius: 0 2px 2px 0;
+    color: white
+}
