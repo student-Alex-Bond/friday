@@ -1,0 +1,29 @@
+.pagination {
+    display: flex;
+    align-items: center;
+}
+
+.pageItem {
+    margin: 0 6px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: center;
+    color: #2D2E46;
+}
+
+.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    width: 24px;
+    background: #21268F;
+    border-radius: 2px;
+    color: white;
+}
+
+.arrow{
+    margin: 0 15px;
+    cursor: pointer;
+}

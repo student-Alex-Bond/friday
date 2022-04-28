@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InputSearch } from '../../common/InputSearch/InputSearch';
 import LeftContainer from '../../common/LeftContainer/LeftContainer';
 import { MainContainer } from '../../common/MainContainer/MainContainer';
+import { Pagination } from '../../common/Pagination/Pagination';
 import { RangeSlider } from '../../common/RangeSlider/RangeSlider';
+import { Select } from '../../common/Select/Select';
 import { RootState } from '../../store/store';
 
 import { PackItem } from './PackItem/PackItem';
@@ -61,6 +63,12 @@ const PacksList: FC = () => {
         {cardsPacks.map(pack => (
           <PackItem key={pack.created} pack={pack} />
         ))}
+        <div className={classes.countPage}>
+          <Pagination currentPage={1} />
+          <span>Show</span>
+          <Select />
+          <span>Card per Page</span>
+        </div>
       </div>
     </MainContainer>
   );

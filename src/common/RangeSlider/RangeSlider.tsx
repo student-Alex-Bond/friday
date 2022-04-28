@@ -23,7 +23,7 @@ const RangeSlider: FC = () => {
         getAriaLabel={() => 'Number of cards in a deck'}
         value={value}
         onChange={handleChange}
-        valueLabelDisplay="auto"
+        valueLabelDisplay="on"
         getAriaValueText={valuetext}
         max={150}
       />
