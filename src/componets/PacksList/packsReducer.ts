@@ -19,21 +19,63 @@ export type CardsPackType = {
   user_name: string;
 };
 
+export type queryParamsType = {
+  minMaxContCards: number[];
+  currentPage: number;
+  pageCount: number;
+};
+
+const firstNumber = 0;
+const lastNumber = 12;
 export const initialState = {
   cardsPacks: [],
+  queryParams: {
+    minMaxContCards: [firstNumber, lastNumber],
+    currentPage: 1,
+    pageCount: 4,
+  },
 };
 
 export const GET_PACKS = 'packs/GET-PACKS';
+export const SET_MIN_MAX_COUNT_CARDS = 'packs/SET-MIN-MAX-COUNT-CARDS';
+export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
+export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 
-export type InitialStateType = { cardsPacks: CardsPackType[] };
+export type InitialStateType = {
+  cardsPacks: CardsPackType[];
+  queryParams: queryParamsType;
+};
 export type GetPacksType = ReturnType<typeof getPacks>;
-export type ActionsType = GetPacksType | SetMessageType;
+export type SetMinMaxContCardsType = ReturnType<typeof setMinMaxContCards>;
+export type SetPageCountType = ReturnType<typeof setPageCount>;
+export type setCurrentPageType = ReturnType<typeof setCurrentPage>;
+export type ActionsType =
+  | GetPacksType
+  | SetMessageType
+  | SetMinMaxContCardsType
+  | SetPageCountType
+  | setCurrentPageType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
   action: ActionsType,
 ): InitialStateType => {
   switch (action.type) {
+    case SET_MIN_MAX_COUNT_CARDS:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, minMaxContCards: action.payload.values },
+      };
+    case SET_PAGE_COUNT:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, pageCount: action.payload.pageCount },
+      };
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, currentPage: action.payload.currentPage },
+      };
     case GET_PACKS:
       return { ...state, cardsPacks: action.payload.packs };
     default:
@@ -42,6 +84,18 @@ export const packsReducer = (
 };
 export const getPacks = (packs: any) =>
   ({ type: GET_PACKS, payload: { packs } } as const);
+
+export const setMinMaxContCards = (values: number[]) =>
+  ({ type: SET_MIN_MAX_COUNT_CARDS, payload: { values } } as const);
+
+export const setPageCount = (pageCount: number) =>
+  ({
+    type: SET_PAGE_COUNT,
+    payload: { pageCount },
+  } as const);
+
+export const setCurrentPage = (currentPage: number) =>
+  ({ type: SET_CURRENT_PAGE, payload: { currentPage } } as const);
 
 export const getPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
   cardsApi.getCards().then(response => {

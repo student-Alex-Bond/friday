@@ -1,5 +1,9 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
+import { setPageCount } from '../../componets/PacksList/packsReducer';
+
 import classes from './Select.module.css';
 
 export const numberOfPages = ['5', '10', '15'];
@@ -7,6 +11,7 @@ export const numberOfPages = ['5', '10', '15'];
 type SelectType = {};
 
 const Select: FC<SelectType> = () => {
+  const dispatch = useDispatch();
   const firstElementInArray = 0;
   const [option, setOption] = useState<string>(numberOfPages[firstElementInArray]);
 
@@ -14,6 +19,7 @@ const Select: FC<SelectType> = () => {
     const selectIndex = event.currentTarget.options.selectedIndex;
     setOption(numberOfPages[selectIndex]);
   };
+  dispatch(setPageCount(Number(option)));
   const mappedOptions = numberOfPages.map(optionItem => (
     <option key={optionItem}>{optionItem}</option>
   ));

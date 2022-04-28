@@ -10,6 +10,9 @@
     font-size: 15px;
     text-align: center;
     color: #2D2E46;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
 .active {

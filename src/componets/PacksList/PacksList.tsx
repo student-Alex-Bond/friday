@@ -21,6 +21,9 @@ const PacksList: FC = () => {
   const cardsPacks = useSelector<RootState, CardsPackType[]>(
     state => state.cardsPacks.cardsPacks,
   );
+  const currentPage = useSelector<RootState, number>(
+    state => state.cardsPacks.queryParams.currentPage,
+  );
   useEffect(() => {
     dispatch(getPacksTC());
   }, []);
@@ -64,7 +67,7 @@ const PacksList: FC = () => {
           <PackItem key={pack.created} pack={pack} />
         ))}
         <div className={classes.countPage}>
-          <Pagination currentPage={1} />
+          <Pagination currentPage={currentPage} />
           <span>Show</span>
           <Select />
           <span>Card per Page</span>
