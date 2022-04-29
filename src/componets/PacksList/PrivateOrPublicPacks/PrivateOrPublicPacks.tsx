@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../store/store';
-import { setMyId } from '../packsReducer';
+import { setCurrentPage, setMyId } from '../packsReducer';
 
 import classes from './PrivateOrPublicPacks.module.css';
 
@@ -17,11 +17,15 @@ const PrivateOrPublicPacks: FC = () => {
 
   const privatePacks = (): void => {
     if (myID) {
+      const firstPage = 1;
       dispatch(setMyId(myID));
+      dispatch(setCurrentPage(firstPage));
     }
   };
   const publicPacks = (): void => {
+    const firstPage = 1;
     dispatch(setMyId(undefined));
+    dispatch(setCurrentPage(firstPage));
   };
   return (
     <div className={classes.btnContainer}>

@@ -81,3 +81,8 @@
     display: flex;
     align-items: center;
 }
+
+.notFound{
+    text-align: center;
+    margin: 10px;
+}

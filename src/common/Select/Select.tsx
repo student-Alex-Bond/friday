@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -8,18 +8,21 @@ import classes from './Select.module.css';
 
 export const numberOfPages = ['5', '10', '15'];
 
-type SelectType = {};
+type SelectType = {
+  page: string;
+};
 
-const Select: FC<SelectType> = () => {
+const Select: FC<SelectType> = ({ page }) => {
   const dispatch = useDispatch();
-  const firstElementInArray = 0;
-  const [option, setOption] = useState<string>(numberOfPages[firstElementInArray]);
+  const [option, setOption] = useState<string>(page);
 
   const currentSelectIndex = (event: ChangeEvent<HTMLSelectElement>): void => {
     const selectIndex = event.currentTarget.options.selectedIndex;
     setOption(numberOfPages[selectIndex]);
   };
-  dispatch(setPageCount(Number(option)));
+  useEffect(() => {
+    dispatch(setPageCount(Number(option)));
+  }, [option]);
   const mappedOptions = numberOfPages.map(optionItem => (
     <option key={optionItem}>{optionItem}</option>
   ));

@@ -1,7 +1,15 @@
 import { Dispatch } from 'react';
 
 import { cardsApi } from '../../api/cards-api';
-import { setMessage, SetMessageType } from '../App/app-reducer';
+import { RootState } from '../../store/store';
+import {
+  setAppStatus,
+  SetAppStatusType,
+  setError,
+  SetErrorType,
+  setMessage,
+  SetMessageType,
+} from '../App/app-reducer';
 
 export type CardsPackType = {
   cardsCount: number;
@@ -24,17 +32,19 @@ export type queryParamsType = {
   currentPage: number;
   pageCount: number;
   haveID: string | undefined;
+  packName: string;
 };
 
-const firstNumber = 0;
+const firstNumber = 1;
 const lastNumber = 12;
 export const initialState = {
   cardsPacks: [],
   queryParams: {
     minMaxContCards: [firstNumber, lastNumber],
     currentPage: 1,
-    pageCount: 4,
+    pageCount: 10,
     haveID: undefined,
+    packName: '',
   },
 };
 
@@ -43,6 +53,7 @@ export const SET_MIN_MAX_COUNT_CARDS = 'packs/SET-MIN-MAX-COUNT-CARDS';
 export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 export const SET_MY_ID = 'packs/SET-MY-ID';
+export const SET_SEARCH_INPUT = 'packs/SET-SEARCH-INPUT';
 
 export type InitialStateType = {
   cardsPacks: CardsPackType[];
@@ -53,13 +64,17 @@ export type SetMinMaxContCardsType = ReturnType<typeof setMinMaxContCards>;
 export type SetPageCountType = ReturnType<typeof setPageCount>;
 export type setCurrentPageType = ReturnType<typeof setCurrentPage>;
 export type SetMyIdType = ReturnType<typeof setMyId>;
+export type SetSearchValueType = ReturnType<typeof setSearchValue>;
 export type ActionsType =
   | GetPacksType
   | SetMessageType
   | SetMinMaxContCardsType
   | SetPageCountType
   | setCurrentPageType
-  | SetMyIdType;
+  | SetMyIdType
+  | SetSearchValueType
+  | SetErrorType
+  | SetAppStatusType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -88,6 +103,11 @@ export const packsReducer = (
         ...state,
         queryParams: { ...state.queryParams, haveID: action.payload.myID },
       };
+    case SET_SEARCH_INPUT:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, packName: action.payload.packName },
+      };
     default:
       return state;
   }
@@ -110,9 +130,24 @@ export const setCurrentPage = (currentPage: number) =>
 export const setMyId = (myID: string | undefined) =>
   ({ type: SET_MY_ID, payload: { myID } } as const);
 
-export const getPacksTC = () => (dispatch: Dispatch<ActionsType>) => {
-  cardsApi.getCards().then(response => {
-    dispatch(getPacks(response.data.cardPacks));
-    dispatch(setMessage(response.statusText));
-  });
-};
+export const setSearchValue = (packName: string) =>
+  ({ type: SET_SEARCH_INPUT, payload: { packName } } as const);
+
+export const getPacksTC =
+  () => (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {
+    dispatch(setAppStatus('loading'));
+    cardsApi
+      .getCards(getState().cardsPacks.queryParams)
+      .then(response => {
+        dispatch(getPacks(response.data.cardPacks));
+        dispatch(setMessage(response.statusText));
+        dispatch(setAppStatus('succeeded'));
+      })
+      .catch(e => {
+        const error = e.response
+          ? e.response.data.error
+          : `${e.message}, more details in the console`;
+        dispatch(setError(error));
+        dispatch(setAppStatus('failed'));
+      });
+  };

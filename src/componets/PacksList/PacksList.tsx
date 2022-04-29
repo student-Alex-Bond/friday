@@ -15,19 +15,31 @@ import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC } from './packsReducer';
 import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPacks';
 
+import { MyBackdrop } from 'common/BackDrop/Backdrop';
 import { Button } from 'common/Button';
 
 const PacksList: FC = () => {
   const dispatch = useDispatch();
+  const status = useSelector<RootState>(state => state.app.status);
+  const pageCount = useSelector<RootState, number>(
+    state => state.cardsPacks.queryParams.pageCount,
+  );
   const cardsPacks = useSelector<RootState, CardsPackType[]>(
     state => state.cardsPacks.cardsPacks,
   );
   const currentPage = useSelector<RootState, number>(
     state => state.cardsPacks.queryParams.currentPage,
   );
+  const packName = useSelector<RootState, string>(
+    state => state.cardsPacks.queryParams.packName,
+  );
+  const haveId = useSelector<RootState, string | undefined>(
+    state => state.cardsPacks.queryParams.haveID,
+  );
   useEffect(() => {
     dispatch(getPacksTC());
-  }, []);
+  }, [pageCount, currentPage, packName, haveId]);
+
   return (
     <MainContainer>
       <LeftContainer>
@@ -39,6 +51,7 @@ const PacksList: FC = () => {
         </div>
       </LeftContainer>
       <div className={classes.packsListContainer}>
+        <div>{status === 'loading' && <MyBackdrop />}</div>
         <h2 className={classes.title}>Packs list</h2>
         <div className={classes.blockSearch}>
           <div className={classes.search}>
@@ -57,13 +70,17 @@ const PacksList: FC = () => {
           <div>Created by</div>
           <div>Actions</div>
         </div>
+        <div className={classes.notFound}>
+          {(haveId !== undefined && <div>You don&#39;t have decks</div>) ||
+            (!cardsPacks.length && <div>This packName not found</div>)}
+        </div>
         {cardsPacks.map(pack => (
           <PackItem key={pack.created} pack={pack} />
         ))}
         <div className={classes.countPage}>
           <Pagination currentPage={currentPage} />
           <span>Show</span>
-          <Select />
+          <Select page={String(pageCount)} />
           <span>Card per Page</span>
         </div>
       </div>

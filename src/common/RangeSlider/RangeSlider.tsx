@@ -13,7 +13,7 @@ function valuetext(value: number): string {
 
 const RangeSlider: FC = () => {
   const dispatch = useDispatch();
-  const startValue = 0;
+  const startValue = 1;
   const endValue = 12;
   const [value, setValue] = React.useState<number[]>([startValue, endValue]);
 
