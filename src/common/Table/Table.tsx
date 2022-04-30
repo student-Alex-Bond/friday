@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { CardsPackType } from '../../componets/PacksList/packsReducer';
 
@@ -7,7 +7,7 @@ import classes from './Table.module.css';
 type TableType = {
   cardsPacks: CardsPackType[];
 };
-const Table: FC<TableType> = ({ cardsPacks }) => {
+const Table: FC<TableType> = memo(({ cardsPacks }) => {
   const zero = 0;
   if (cardsPacks.length === zero) {
     return <div className={classes.notFound}>This packName not found</div>;
@@ -55,5 +55,5 @@ const Table: FC<TableType> = ({ cardsPacks }) => {
       </div>
     </div>
   );
-};
+});
 export { Table };

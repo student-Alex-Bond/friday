@@ -4,7 +4,7 @@
 }
 
 .pageItem {
-    margin: 0 6px;
+
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 15px;
@@ -27,6 +27,6 @@
 }
 
 .arrow{
-    margin: 0 15px;
+    margin: 0 5px;
     cursor: pointer;
 }

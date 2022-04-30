@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,7 +18,7 @@ import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPack
 import { MyBackdrop } from 'common/BackDrop/Backdrop';
 import { Button } from 'common/Button';
 
-const PacksList: FC = () => {
+const PacksList: FC = memo(() => {
   const dispatch = useDispatch();
   const status = useSelector<RootState>(state => state.app.status);
   const pageCount = useSelector<RootState, number>(
@@ -35,6 +35,9 @@ const PacksList: FC = () => {
   );
   const haveId = useSelector<RootState, string | undefined>(
     state => state.cardsPacks.queryParams.haveID,
+  );
+  const cardsCountTotalCount = useSelector<RootState, number>(
+    state => state.cardsPacks.cardPacksTotalCount,
   );
   useEffect(() => {
     dispatch(getPacksTC());
@@ -68,7 +71,7 @@ const PacksList: FC = () => {
         </div>
         <Table cardsPacks={cardsPacks} />
         <div className={classes.countPage}>
-          <Pagination currentPage={currentPage} />
+          <Pagination currentPage={currentPage} totalCount={cardsCountTotalCount} />
           <span>Show</span>
           <Select page={String(pageCount)} />
           <span>Card per Page</span>
@@ -76,5 +79,5 @@ const PacksList: FC = () => {
       </div>
     </MainContainer>
   );
-};
+});
 export default PacksList;

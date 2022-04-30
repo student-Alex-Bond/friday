@@ -46,6 +46,7 @@ export const initialState = {
     haveID: undefined,
     packName: '',
   },
+  cardPacksTotalCount: 0,
 };
 
 export const GET_PACKS = 'packs/GET-PACKS';
@@ -54,10 +55,12 @@ export const SET_PAGE_COUNT = 'packs/SET-PAGE-COUNT';
 export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 export const SET_MY_ID = 'packs/SET-MY-ID';
 export const SET_SEARCH_INPUT = 'packs/SET-SEARCH-INPUT';
+export const SET_TOTAL_COUNT = 'packs/SET-TOTAL-COUNT';
 
 export type InitialStateType = {
   cardsPacks: CardsPackType[];
   queryParams: queryParamsType;
+  cardPacksTotalCount: number;
 };
 export type GetPacksType = ReturnType<typeof getPacks>;
 export type SetMinMaxContCardsType = ReturnType<typeof setMinMaxContCards>;
@@ -65,6 +68,7 @@ export type SetPageCountType = ReturnType<typeof setPageCount>;
 export type setCurrentPageType = ReturnType<typeof setCurrentPage>;
 export type SetMyIdType = ReturnType<typeof setMyId>;
 export type SetSearchValueType = ReturnType<typeof setSearchValue>;
+export type SetCardPacksTotalCountType = ReturnType<typeof setCardPacksTotalCount>;
 export type ActionsType =
   | GetPacksType
   | SetMessageType
@@ -74,7 +78,8 @@ export type ActionsType =
   | SetMyIdType
   | SetSearchValueType
   | SetErrorType
-  | SetAppStatusType;
+  | SetAppStatusType
+  | SetCardPacksTotalCountType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -108,6 +113,8 @@ export const packsReducer = (
         ...state,
         queryParams: { ...state.queryParams, packName: action.payload.packName },
       };
+    case SET_TOTAL_COUNT:
+      return { ...state, cardPacksTotalCount: action.payload.totalCount };
     default:
       return state;
   }
@@ -132,6 +139,8 @@ export const setMyId = (myID: string | undefined) =>
 
 export const setSearchValue = (packName: string) =>
   ({ type: SET_SEARCH_INPUT, payload: { packName } } as const);
+export const setCardPacksTotalCount = (totalCount: number) =>
+  ({ type: SET_TOTAL_COUNT, payload: { totalCount } } as const);
 
 export const getPacksTC =
   () => (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {
@@ -140,6 +149,7 @@ export const getPacksTC =
       .getCards(getState().cardsPacks.queryParams)
       .then(response => {
         dispatch(getPacks(response.data.cardPacks));
+        dispatch(setCardPacksTotalCount(response.data.cardPacksTotalCount));
         dispatch(setMessage(response.statusText));
         dispatch(setAppStatus('succeeded'));
       })
