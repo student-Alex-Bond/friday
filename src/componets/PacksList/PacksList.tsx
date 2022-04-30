@@ -8,9 +8,9 @@ import { MainContainer } from '../../common/MainContainer/MainContainer';
 import { Pagination } from '../../common/Pagination/Pagination';
 import { RangeSlider } from '../../common/RangeSlider/RangeSlider';
 import { Select } from '../../common/Select/Select';
+import { Table } from '../../common/Table/Table';
 import { RootState } from '../../store/store';
 
-import { PackItem } from './PackItem/PackItem';
 import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC } from './packsReducer';
 import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPacks';
@@ -63,20 +63,10 @@ const PacksList: FC = () => {
             </Button>
           </div>
         </div>
-        <div className={classes.tableHeader}>
-          <div>Name</div>
-          <div>Cards</div>
-          <div>LastUpdate</div>
-          <div>Created by</div>
-          <div>Actions</div>
-        </div>
         <div className={classes.notFound}>
-          {(haveId !== undefined && <div>You don&#39;t have decks</div>) ||
-            (!cardsPacks.length && <div>This packName not found</div>)}
+          {haveId !== undefined && <div>You don&#39;t have decks</div>}
         </div>
-        {cardsPacks.map(pack => (
-          <PackItem key={pack.created} pack={pack} />
-        ))}
+        <Table cardsPacks={cardsPacks} />
         <div className={classes.countPage}>
           <Pagination currentPage={currentPage} />
           <span>Show</span>

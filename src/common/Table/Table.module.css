@@ -1,0 +1,74 @@
+.notFound{
+    text-align: center;
+    margin: 40px;
+}
+
+.btn {
+    font-family: 'SF UI Display', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    color: #21268F;
+    background: #D7D8EF;
+    border-radius: 2px;
+    border: none;
+    width: 48px;
+    height: 24px;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+.btn:first-child {
+    color: #FFFFFF;
+    background: #F1453D;
+}
+.scroll-table{
+    margin-top: 20px;
+}
+.scroll-table-body {
+    height: 280px;
+    overflow-x: auto;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 14px rgba(45, 46, 70, 0.15);
+}
+
+.scroll-table table {
+    width: 100%;
+    table-layout: fixed;
+    box-shadow: 0 4px 14px rgba(45, 46, 70, 0.15);
+    border-spacing: 0;
+}
+
+.scroll-table thead th {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    background: #ECECF9;
+    font-size: 14px;
+}
+
+.scroll-table tbody td {
+    text-align: center;
+    font-size: 14px !important;
+    vertical-align: center;
+padding: 16px 0;
+}
+
+.scroll-table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+/* Стили для скролла */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+

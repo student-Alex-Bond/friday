@@ -42,7 +42,7 @@ export const initialState = {
   queryParams: {
     minMaxContCards: [firstNumber, lastNumber],
     currentPage: 1,
-    pageCount: 10,
+    pageCount: 5,
     haveID: undefined,
     packName: '',
   },
