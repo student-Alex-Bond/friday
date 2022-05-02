@@ -33,6 +33,7 @@ export type queryParamsType = {
   pageCount: number;
   haveID: string | undefined;
   packName: string;
+  sortPacks: string;
 };
 
 const firstNumber = 1;
@@ -45,6 +46,7 @@ export const initialState = {
     pageCount: 5,
     haveID: undefined,
     packName: '',
+    sortPacks: '0updated',
   },
   cardPacksTotalCount: 0,
 };
@@ -56,6 +58,7 @@ export const SET_CURRENT_PAGE = 'packs/SET-CURRENT-PAGE';
 export const SET_MY_ID = 'packs/SET-MY-ID';
 export const SET_SEARCH_INPUT = 'packs/SET-SEARCH-INPUT';
 export const SET_TOTAL_COUNT = 'packs/SET-TOTAL-COUNT';
+export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';
 
 export type InitialStateType = {
   cardsPacks: CardsPackType[];
@@ -69,6 +72,7 @@ export type setCurrentPageType = ReturnType<typeof setCurrentPage>;
 export type SetMyIdType = ReturnType<typeof setMyId>;
 export type SetSearchValueType = ReturnType<typeof setSearchValue>;
 export type SetCardPacksTotalCountType = ReturnType<typeof setCardPacksTotalCount>;
+export type SetSortPacksType = ReturnType<typeof setSortPacks>;
 export type ActionsType =
   | GetPacksType
   | SetMessageType
@@ -79,7 +83,8 @@ export type ActionsType =
   | SetSearchValueType
   | SetErrorType
   | SetAppStatusType
-  | SetCardPacksTotalCountType;
+  | SetCardPacksTotalCountType
+  | SetSortPacksType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -115,6 +120,11 @@ export const packsReducer = (
       };
     case SET_TOTAL_COUNT:
       return { ...state, cardPacksTotalCount: action.payload.totalCount };
+    case SET_SORT_PACKS:
+      return {
+        ...state,
+        queryParams: { ...state.queryParams, sortPacks: action.payload.sort },
+      };
     default:
       return state;
   }
@@ -141,6 +151,8 @@ export const setSearchValue = (packName: string) =>
   ({ type: SET_SEARCH_INPUT, payload: { packName } } as const);
 export const setCardPacksTotalCount = (totalCount: number) =>
   ({ type: SET_TOTAL_COUNT, payload: { totalCount } } as const);
+export const setSortPacks = (sort: string) =>
+  ({ type: SET_SORT_PACKS, payload: { sort } } as const);
 
 export const getPacksTC =
   () => (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {

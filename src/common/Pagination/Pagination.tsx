@@ -22,6 +22,7 @@ const Pagination: FC<PaginationType> = memo(({ currentPage, totalCount }) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
+
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   const [portionNumber, setPortionNumber] = useState<number>(1);
   const leftPortionPageNumber = portionNumber;
@@ -80,4 +81,5 @@ const Pagination: FC<PaginationType> = memo(({ currentPage, totalCount }) => {
     </div>
   );
 });
+
 export { Pagination };

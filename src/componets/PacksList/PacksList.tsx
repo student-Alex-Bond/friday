@@ -12,7 +12,7 @@ import { Table } from '../../common/Table/Table';
 import { RootState } from '../../store/store';
 
 import classes from './PacksList.module.css';
-import { CardsPackType, getPacksTC } from './packsReducer';
+import { CardsPackType, getPacksTC, setSearchValue } from './packsReducer';
 import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPacks';
 
 import { MyBackdrop } from 'common/BackDrop/Backdrop';
@@ -39,9 +39,21 @@ const PacksList: FC = memo(() => {
   const cardsCountTotalCount = useSelector<RootState, number>(
     state => state.cardsPacks.cardPacksTotalCount,
   );
+  const valueSearchInput = useSelector<RootState, string>(
+    state => state.cardsPacks.queryParams.packName,
+  );
+  const searchPackName = (value: string): void => {
+    dispatch(setSearchValue(value));
+  };
+  const sortPack = useSelector<RootState, string>(
+    state => state.cardsPacks.queryParams.sortPacks,
+  );
+  useEffect(() => {
+    searchPackName(valueSearchInput);
+  }, [valueSearchInput]);
   useEffect(() => {
     dispatch(getPacksTC());
-  }, [pageCount, currentPage, packName, haveId]);
+  }, [pageCount, currentPage, packName, haveId, sortPack]);
 
   return (
     <MainContainer>
@@ -58,7 +70,11 @@ const PacksList: FC = memo(() => {
         <h2 className={classes.title}>Packs list</h2>
         <div className={classes.blockSearch}>
           <div className={classes.search}>
-            <InputSearch />
+            <InputSearch
+              placeholder="Search ... "
+              getValueSearchInput={searchPackName}
+              initialValue={valueSearchInput}
+            />
           </div>
           <div className={classes.btnAdd}>
             <Button color="#21268F" type={undefined}>

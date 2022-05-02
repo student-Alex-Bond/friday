@@ -1,0 +1,13 @@
+.btnDown{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.btnUp{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.btnUp img{
+    transform: rotate(180deg);
+}

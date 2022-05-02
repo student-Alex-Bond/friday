@@ -1,6 +1,10 @@
 import React, { FC, memo } from 'react';
 
-import { CardsPackType } from '../../componets/PacksList/packsReducer';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { CardsPackType, setSortPacks } from '../../componets/PacksList/packsReducer';
+import { RootState } from '../../store/store';
+import { SortedButton } from '../SortedButton/SortedButton';
 
 import classes from './Table.module.css';
 
@@ -8,6 +12,13 @@ type TableType = {
   cardsPacks: CardsPackType[];
 };
 const Table: FC<TableType> = memo(({ cardsPacks }) => {
+  const dispatch = useDispatch();
+  const sortedPacks = useSelector<RootState, string>(
+    state => state.cardsPacks.queryParams.sortPacks,
+  );
+  const changeMethodSort = (methodSort: string): void => {
+    dispatch(setSortPacks(methodSort));
+  };
   const zero = 0;
   if (cardsPacks.length === zero) {
     return <div className={classes.notFound}>This packName not found</div>;
@@ -19,7 +30,15 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
           <tr className={classes.header}>
             <th>Name</th>
             <th>Cards</th>
-            <th>Last Update</th>
+            <th>
+              <div style={{ display: 'flex' }}>
+                Last Update
+                <SortedButton
+                  sortedPacks={sortedPacks}
+                  changeMethodSort={changeMethodSort}
+                />
+              </div>
+            </th>
             <th>Created by</th>
             <th colSpan={2}>Actions</th>
           </tr>

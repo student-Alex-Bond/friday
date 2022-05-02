@@ -32,7 +32,7 @@ export const cardsApi = {
   getCards(queryParams: queryParamsType) {
     const firstElementInArray = 0;
     const lastElementInArray = 1;
-    const stringRequest = `/cards/pack?user_id=${
+    const stringRequest = `/cards/pack?sortPacks=${queryParams.sortPacks}&user_id=${
       queryParams.haveID === undefined ? '' : queryParams.haveID
     }&packName=${queryParams.packName}&min=${
       queryParams.minMaxContCards[firstElementInArray]
