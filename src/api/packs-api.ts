@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { LoginUserType } from '../componets/Login/actions';
+import { InitialStateType } from '../componets/PacksList/PackItem/pack-item-reducer';
 import { queryParamsType } from '../componets/PacksList/packsReducer';
 
 import { NewUserType, UpdateUserType } from './types';
@@ -28,8 +29,8 @@ export const authApi = {
   },
 };
 
-export const cardsApi = {
-  getCards(queryParams: queryParamsType) {
+export const packsApi = {
+  getPacks(queryParams: queryParamsType) {
     const firstElementInArray = 0;
     const lastElementInArray = 1;
     const stringRequest = `/cards/pack?sortPacks=${queryParams.sortPacks}&user_id=${
@@ -40,5 +41,12 @@ export const cardsApi = {
       queryParams.currentPage
     }&pageCount=${queryParams.pageCount}`;
     return instance.get(stringRequest);
+  },
+};
+
+export const cardsApi = {
+  getCard(state: InitialStateType) {
+    const config = { cardsPack_id: state.cardsPack_id };
+    return instance.get('/cards/card', { params: config });
   },
 };

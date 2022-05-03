@@ -6,4 +6,4 @@ const LeftContainer: FC = ({ children }) => (
   <div className={classes.leftContainer}>{children}</div>
 );
 
-export default LeftContainer;
+export { LeftContainer };

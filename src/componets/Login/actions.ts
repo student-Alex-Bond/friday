@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import axios from 'axios';
 
-import { authApi } from '../../api/cards-api';
+import { authApi } from '../../api/packs-api';
 import { UpdateUserType } from '../../api/types';
 import { isInitialized, setAppStatus, setError, setMessage } from '../App/app-reducer';
 

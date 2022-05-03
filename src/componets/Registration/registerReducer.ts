@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 
-import { authApi } from '../../api/cards-api';
+import { authApi } from '../../api/packs-api';
 import { NewUserType } from '../../api/types';
 
 import { setError, SetErrorType } from 'componets/App/app-reducer';

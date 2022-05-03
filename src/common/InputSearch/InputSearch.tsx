@@ -1,10 +1,12 @@
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setCurrentPage } from '../../componets/PacksList/packsReducer';
 
 import classes from './InputSearch.module.css';
+
+import { RootState } from 'store';
 
 type InputSearchType = {
   initialValue: string;
@@ -19,15 +21,22 @@ const InputSearch: FC<InputSearchType> = ({
 }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState<string>(initialValue);
-
+  const inputSearch = useSelector<RootState, string>(
+    state => state.cardsPacks.queryParams.packName,
+  );
   const onChangeValue = (event: ChangeEvent<HTMLInputElement>): void => {
     setValue(event.currentTarget.value);
   };
+
   useEffect(() => {
+    if (inputSearch === value) {
+      return;
+    }
     const firstPage = 1;
     const waitingTime = 1500;
     const timerId = setTimeout(() => getValueSearchInput(value), waitingTime);
     dispatch(setCurrentPage(firstPage));
+    // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(timerId);
     };

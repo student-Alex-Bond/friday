@@ -3,15 +3,15 @@ import React, { FC, memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import LeftContainer from '../../common/LeftContainer/LeftContainer';
-import { MainContainer } from '../../common/MainContainer/MainContainer';
-import { RootState } from '../../store/store';
+import { RootState } from '../../store';
 import { logoutTC } from '../Login/actions';
 import { selectUser } from '../Login/selectors';
 
 import classes from './Profile.module.css';
 
 import ava from 'assets/avatar/avatar-svgrepo-com.svg';
+import { LeftContainer } from 'common/LeftContainer';
+import { MainContainer } from 'common/MainContainer';
 import { UserType } from 'componets/Login/types';
 
 const Profile: FC = memo(() => {

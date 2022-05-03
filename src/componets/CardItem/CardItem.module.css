@@ -1,0 +1,19 @@
+.item {
+    display: flex;
+    height: 48px;
+    background: #FFFFFF;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item > div {
+    font-family: 'SF UI Display', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: #000000;
+}
+.item:nth-child(even){
+    background: #F8F7FD;
+}

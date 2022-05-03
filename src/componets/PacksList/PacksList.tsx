@@ -1,60 +1,69 @@
 import React, { FC, memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { InputSearch } from '../../common/InputSearch/InputSearch';
-import LeftContainer from '../../common/LeftContainer/LeftContainer';
-import { MainContainer } from '../../common/MainContainer/MainContainer';
-import { Pagination } from '../../common/Pagination/Pagination';
-import { RangeSlider } from '../../common/RangeSlider/RangeSlider';
-import { Select } from '../../common/Select/Select';
-import { Table } from '../../common/Table/Table';
-import { RootState } from '../../store/store';
+import { RootState } from '../../store';
+import { RequestStatusType } from '../App/app-reducer';
+import { selectUser } from '../Login/selectors';
+import { UserType } from '../Login/types';
 
 import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC, setSearchValue } from './packsReducer';
-import { PrivateOrPublicPacks } from './PrivateOrPublicPacks/PrivateOrPublicPacks';
+import {
+  selectedCardsCountTotalCount,
+  selectedCardsPacks,
+  selectedCurrentPage,
+  selectedId,
+  selectedPackName,
+  selectedPageCount,
+  selectedSortPack,
+  selectedStatusApp,
+  selectedValueSearchInput,
+} from './selectors';
 
 import { MyBackdrop } from 'common/BackDrop/Backdrop';
 import { Button } from 'common/Button';
+import { InputSearch } from 'common/InputSearch';
+import { LeftContainer } from 'common/LeftContainer';
+import { MainContainer } from 'common/MainContainer';
+import { Pagination } from 'common/Pagination';
+import { RangeSlider } from 'common/RangeSlider';
+import { Select } from 'common/Select';
+import { Table } from 'common/Table';
+import { PrivateOrPublicPacks } from 'componets/PacksList/PrivateOrPublicPacks';
 
 const PacksList: FC = memo(() => {
   const dispatch = useDispatch();
-  const status = useSelector<RootState>(state => state.app.status);
-  const pageCount = useSelector<RootState, number>(
-    state => state.cardsPacks.queryParams.pageCount,
-  );
-  const cardsPacks = useSelector<RootState, CardsPackType[]>(
-    state => state.cardsPacks.cardsPacks,
-  );
-  const currentPage = useSelector<RootState, number>(
-    state => state.cardsPacks.queryParams.currentPage,
-  );
-  const packName = useSelector<RootState, string>(
-    state => state.cardsPacks.queryParams.packName,
-  );
-  const haveId = useSelector<RootState, string | undefined>(
-    state => state.cardsPacks.queryParams.haveID,
-  );
+  const navigate = useNavigate();
+  const user = useSelector<RootState, UserType | null>(selectUser);
+  const status = useSelector<RootState, RequestStatusType>(selectedStatusApp);
+  const pageCount = useSelector<RootState, number>(selectedPageCount);
+  const cardsPacks = useSelector<RootState, CardsPackType[]>(selectedCardsPacks);
+  const currentPage = useSelector<RootState, number>(selectedCurrentPage);
+  const packName = useSelector<RootState, string>(selectedPackName);
+  const haveId = useSelector<RootState, string | undefined>(selectedId);
   const cardsCountTotalCount = useSelector<RootState, number>(
-    state => state.cardsPacks.cardPacksTotalCount,
+    selectedCardsCountTotalCount,
   );
-  const valueSearchInput = useSelector<RootState, string>(
-    state => state.cardsPacks.queryParams.packName,
-  );
+  const valueSearchInput = useSelector<RootState, string>(selectedValueSearchInput);
+  const sortPack = useSelector<RootState, string>(selectedSortPack);
   const searchPackName = (value: string): void => {
     dispatch(setSearchValue(value));
   };
-  const sortPack = useSelector<RootState, string>(
-    state => state.cardsPacks.queryParams.sortPacks,
-  );
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user]);
   useEffect(() => {
     searchPackName(valueSearchInput);
   }, [valueSearchInput]);
   useEffect(() => {
+    console.log('render useEffect');
     dispatch(getPacksTC());
   }, [pageCount, currentPage, packName, haveId, sortPack]);
-
+  console.log('render');
   return (
     <MainContainer>
       <LeftContainer>
@@ -96,4 +105,4 @@ const PacksList: FC = memo(() => {
     </MainContainer>
   );
 });
-export default PacksList;
+export { PacksList };

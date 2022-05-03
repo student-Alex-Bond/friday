@@ -1,10 +1,16 @@
 import React, { FC, memo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
+import {
+  setPackName,
+  setPackNameID,
+} from '../../componets/PacksList/PackItem/pack-item-reducer';
 import { CardsPackType, setSortPacks } from '../../componets/PacksList/packsReducer';
-import { RootState } from '../../store/store';
-import { SortedButton } from '../SortedButton/SortedButton';
+import { selectedSortPack } from '../../componets/PacksList/selectors';
+import { RootState } from '../../store';
+import { SortedButton } from '../SortedButton';
 
 import classes from './Table.module.css';
 
@@ -13,9 +19,7 @@ type TableType = {
 };
 const Table: FC<TableType> = memo(({ cardsPacks }) => {
   const dispatch = useDispatch();
-  const sortedPacks = useSelector<RootState, string>(
-    state => state.cardsPacks.queryParams.sortPacks,
-  );
+  const sortedPacks = useSelector<RootState, string>(selectedSortPack);
   const changeMethodSort = (methodSort: string): void => {
     dispatch(setSortPacks(methodSort));
   };
@@ -49,9 +53,18 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
           <tbody>
             {cardsPacks.map(pack => {
               const createdDate = new Date(pack.created).toLocaleDateString();
+              const setCurrentPackName = (): void => {
+                dispatch(setPackName(pack.name));
+                // eslint-disable-next-line no-underscore-dangle
+                dispatch(setPackNameID(pack._id));
+              };
               return (
                 <tr className={classes.row} key={pack.created}>
-                  <td>{pack.name}</td>
+                  <td>
+                    <NavLink to="/packs-list/pack-item" onClick={setCurrentPackName}>
+                      {pack.name}
+                    </NavLink>
+                  </td>
                   <td>{pack.cardsCount}</td>
                   <td>{createdDate}</td>
                   <td>{pack.user_name}</td>

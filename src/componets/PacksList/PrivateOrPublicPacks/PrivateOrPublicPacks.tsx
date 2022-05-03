@@ -1,19 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../store';
 import { setCurrentPage, setMyId } from '../packsReducer';
+import { selectedId } from '../selectors';
 
 import classes from './PrivateOrPublicPacks.module.css';
 
-const PrivateOrPublicPacks: FC = () => {
+const PrivateOrPublicPacks: FC = memo(() => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-underscore-dangle
   const myID = useSelector<RootState, string | undefined>(state => state.login.user?._id);
-  const haveID = useSelector<RootState, string | undefined>(
-    state => state.cardsPacks.queryParams.haveID,
-  );
+  const haveID = useSelector<RootState, string | undefined>(selectedId);
 
   const privatePacks = (): void => {
     if (myID) {
@@ -49,6 +48,6 @@ const PrivateOrPublicPacks: FC = () => {
       </button>
     </div>
   );
-};
+});
 
 export { PrivateOrPublicPacks };

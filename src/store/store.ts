@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { loginReducer } from '../componets/Login/loginReducer';
+import { packItemReducer } from '../componets/PacksList/PackItem/pack-item-reducer';
 import { packsReducer } from '../componets/PacksList/packsReducer';
 
 import { passwordReducer } from './passwordReducer';
@@ -18,6 +19,7 @@ export const rootReducer = combineReducers({
   profile: profileReducer,
   register: registerReducer,
   cardsPacks: packsReducer,
+  cards: packItemReducer,
 });
 
 export const store = createStore(

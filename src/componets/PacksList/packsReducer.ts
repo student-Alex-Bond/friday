@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 
-import { cardsApi } from '../../api/cards-api';
-import { RootState } from '../../store/store';
+import { packsApi } from '../../api/packs-api';
+import { RootState } from '../../store';
 import {
   setAppStatus,
   SetAppStatusType,
@@ -14,6 +14,7 @@ import {
 export type CardsPackType = {
   cardsCount: number;
   created: string;
+  deckCover: null;
   grade: number;
   more_id: string;
   name: string;
@@ -25,6 +26,8 @@ export type CardsPackType = {
   updated: string;
   user_id: string;
   user_name: string;
+  __v: number;
+  _id: string;
 };
 
 export type queryParamsType = {
@@ -157,8 +160,8 @@ export const setSortPacks = (sort: string) =>
 export const getPacksTC =
   () => (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {
     dispatch(setAppStatus('loading'));
-    cardsApi
-      .getCards(getState().cardsPacks.queryParams)
+    packsApi
+      .getPacks(getState().cardsPacks.queryParams)
       .then(response => {
         dispatch(getPacks(response.data.cardPacks));
         dispatch(setCardPacksTotalCount(response.data.cardPacksTotalCount));

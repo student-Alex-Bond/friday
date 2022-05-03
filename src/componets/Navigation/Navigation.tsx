@@ -2,17 +2,17 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
-import PacksList from '../PacksList/PacksList';
-import { PersonalInfo } from '../Profile/PersonalInfo/PersonalInfo';
-
 import styles from './Navigation.module.css';
 
 import { Login } from 'componets/Login';
 import { NewPassword } from 'componets/NewPassword';
 import { NotFound } from 'componets/NotFound';
+import { PacksList } from 'componets/PacksList';
+import { PackItems } from 'componets/PacksList/PackItem';
 import { PasswordRecovery } from 'componets/PasswordRecovery';
 import { CheckEmail } from 'componets/PasswordRecovery/CheckEmail';
 import { Profile } from 'componets/Profile';
+import { PersonalInfo } from 'componets/Profile/PersonalInfo/PersonalInfo';
 import { Registration } from 'componets/Registration';
 
 export const routes = [
@@ -53,6 +53,7 @@ const Navigation: FC<NavigationPropsType> = () => (
       ))}
       <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
       <Route key={8} path="profile/personal-info" element={<PersonalInfo />} />
+      <Route key={9} path="packs-list/pack-item" element={<PackItems />} />
     </Routes>
   </div>
 );
