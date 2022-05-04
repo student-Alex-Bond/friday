@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,7 @@ import classes from './CardItem.module.css';
 type CardItemType = {
   card: CardType;
 };
-const CardItem: FC<CardItemType> = ({ card }) => {
+const CardItem: FC<CardItemType> = memo(({ card }) => {
   const status = useSelector<RootState, string>(selectedStatusApp);
   const updated = new Date(card.updated).toLocaleDateString();
   return (
@@ -29,5 +29,5 @@ const CardItem: FC<CardItemType> = ({ card }) => {
       </div>
     </>
   );
-};
+});
 export { CardItem };

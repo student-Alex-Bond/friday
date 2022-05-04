@@ -14,13 +14,21 @@ export type InitialStateType = {
   cards: CardType[];
   cardsPack_id: string;
   packNameID: string;
+  valueSearchQuestion: string;
+  valueSearchAnswer: string;
+  pageCountCards: number;
+  sortCards: string;
 };
 export type ActionType =
   | SetPackNameType
   | SetPackNameIDType
   | SetAppStatusType
   | SetErrorType
-  | SetCardsType;
+  | SetCardsType
+  | SetValueSearchQuestionType
+  | SetValueSearchAnswerType
+  | SetPageCountCardsType
+  | SetSortCardsType;
 
 export type CardType = {
   answer: string;
@@ -46,15 +54,27 @@ const initialState = {
   packName: '',
   cards: [],
   cardsPack_id: '',
+  valueSearchQuestion: '',
+  valueSearchAnswer: '',
+  pageCountCards: 0,
+  sortCards: '0grade',
 };
 
 const SET_PACK_NAME = 'cards/SET-PACK-NAME';
 const SET_PAK_NAME_ID = 'cards/SET-PACK-NAME-ID';
 const SET_CARDS = 'cards/SET-CARDS';
+const SET_VALUE_SEARCH_QUESTION = 'cards/SET-VALUE-SEARCH-QUESTION';
+const SET_VALUE_SEARCH_ANSWER = 'cards/SET-VALUE-SEARCH-ANSWER';
+const SET_PAGE_COUNT_CARDS = 'cards/SET-PAGE-COUNT-CARDS';
+const SET_METHOD_SORT = 'cards/SET-METHOD-SORT';
 
 export type SetPackNameType = ReturnType<typeof setPackName>;
 export type SetPackNameIDType = ReturnType<typeof setPackNameID>;
 export type SetCardsType = ReturnType<typeof setCards>;
+export type SetValueSearchQuestionType = ReturnType<typeof setValueSearchQuestion>;
+export type SetValueSearchAnswerType = ReturnType<typeof setValueSearchAnswer>;
+export type SetPageCountCardsType = ReturnType<typeof setPageCountCards>;
+export type SetSortCardsType = ReturnType<typeof setSortCards>;
 
 export const packItemReducer = (
   state: InitialStateType = initialState,
@@ -67,6 +87,14 @@ export const packItemReducer = (
       return { ...state, cardsPack_id: action.payload.id };
     case SET_CARDS:
       return { ...state, cards: action.payload.cards };
+    case SET_VALUE_SEARCH_QUESTION:
+      return { ...state, valueSearchQuestion: action.payload.value };
+    case SET_VALUE_SEARCH_ANSWER:
+      return { ...state, valueSearchAnswer: action.payload.value };
+    case SET_PAGE_COUNT_CARDS:
+      return { ...state, pageCountCards: action.payload.value };
+    case SET_METHOD_SORT:
+      return { ...state, sortCards: action.payload.methodSort };
     default:
       return state;
   }
@@ -78,7 +106,14 @@ export const setPackNameID = (id: string) =>
   ({ type: SET_PAK_NAME_ID, payload: { id } } as const);
 export const setCards = (cards: CardType[]) =>
   ({ type: SET_CARDS, payload: { cards } } as const);
-
+export const setValueSearchQuestion = (value: string) =>
+  ({ type: SET_VALUE_SEARCH_QUESTION, payload: { value } } as const);
+export const setValueSearchAnswer = (value: string) =>
+  ({ type: SET_VALUE_SEARCH_ANSWER, payload: { value } } as const);
+export const setPageCountCards = (value: number) =>
+  ({ type: SET_PAGE_COUNT_CARDS, payload: { value } } as const);
+export const setSortCards = (methodSort: string) =>
+  ({ type: SET_METHOD_SORT, payload: { methodSort } } as const);
 export const getCards =
   () => (dispatch: Dispatch<ActionType>, getState: () => RootState) => {
     dispatch(setAppStatus('loading'));

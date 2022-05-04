@@ -11,7 +11,7 @@ type ButtonPropsType = DefaultButtonProps & {
   type: 'submit' | undefined;
 };
 
-const Button: FC<ButtonPropsType> = ({ children, color, type }) => (
+const Button: FC<ButtonPropsType> = ({ children, color, type, onClick }) => (
   <div
     style={{
       display: 'flex',
@@ -24,6 +24,7 @@ const Button: FC<ButtonPropsType> = ({ children, color, type }) => (
       type={type ? 'submit' : 'button'}
       style={{ backgroundColor: color }}
       className={classes.btn}
+      onClick={onClick}
     >
       {children}
     </button>

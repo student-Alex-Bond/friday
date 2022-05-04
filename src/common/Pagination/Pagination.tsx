@@ -1,4 +1,4 @@
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useMemo, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -17,12 +17,15 @@ const Pagination: FC<PaginationType> = memo(({ currentPage, totalCount }) => {
   const dispatch = useDispatch();
   const pageSize = 10;
   const pagesCount = Math.ceil(totalCount / pageSize);
-  const pages: number[] = [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
+  const fillArrayOfValues = (): number[] => {
+    const pages: number[] = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+  const pages = useMemo(() => fillArrayOfValues(), [pagesCount]);
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   const [portionNumber, setPortionNumber] = useState<number>(1);
   const leftPortionPageNumber = portionNumber;

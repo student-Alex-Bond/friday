@@ -1,12 +1,10 @@
-import React, { FC, memo, useEffect } from 'react';
+import React, { FC, memo, useEffect, useMemo, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
+import { ModalWindow } from '../../common/ModalWindow';
 import { RootState } from '../../store';
 import { RequestStatusType } from '../App/app-reducer';
-import { selectUser } from '../Login/selectors';
-import { UserType } from '../Login/types';
 
 import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC, setSearchValue } from './packsReducer';
@@ -30,13 +28,11 @@ import { MainContainer } from 'common/MainContainer';
 import { Pagination } from 'common/Pagination';
 import { RangeSlider } from 'common/RangeSlider';
 import { Select } from 'common/Select';
-import { Table } from 'common/Table';
 import { PrivateOrPublicPacks } from 'componets/PacksList/PrivateOrPublicPacks';
+import { Table } from 'componets/PacksList/Table';
 
 const PacksList: FC = memo(() => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const user = useSelector<RootState, UserType | null>(selectUser);
   const status = useSelector<RootState, RequestStatusType>(selectedStatusApp);
   const pageCount = useSelector<RootState, number>(selectedPageCount);
   const cardsPacks = useSelector<RootState, CardsPackType[]>(selectedCardsPacks);
@@ -48,15 +44,15 @@ const PacksList: FC = memo(() => {
   );
   const valueSearchInput = useSelector<RootState, string>(selectedValueSearchInput);
   const sortPack = useSelector<RootState, string>(selectedSortPack);
-  const searchPackName = (value: string): void => {
-    dispatch(setSearchValue(value));
-  };
+  const searchPackName = useMemo(
+    () =>
+      (value: string): void => {
+        dispatch(setSearchValue(value));
+      },
+    [valueSearchInput],
+  );
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user]);
-  useEffect(() => {
+    console.log('render searchInput');
     searchPackName(valueSearchInput);
   }, [valueSearchInput]);
   useEffect(() => {
@@ -64,8 +60,13 @@ const PacksList: FC = memo(() => {
     dispatch(getPacksTC());
   }, [pageCount, currentPage, packName, haveId, sortPack]);
   console.log('render');
+  const [isView, setIsView] = useState<boolean>(false);
+  const viewModal = (): void => {
+    setIsView(true);
+  };
   return (
     <MainContainer>
+      <ModalWindow isView={isView} setIsView={setIsView} />
       <LeftContainer>
         <h2 className={classes.title}>Show packs cards</h2>
         <PrivateOrPublicPacks />
@@ -86,7 +87,7 @@ const PacksList: FC = memo(() => {
             />
           </div>
           <div className={classes.btnAdd}>
-            <Button color="#21268F" type={undefined}>
+            <Button color="#21268F" type={undefined} onClick={viewModal}>
               Add new pack
             </Button>
           </div>

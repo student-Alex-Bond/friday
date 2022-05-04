@@ -5,6 +5,7 @@
 }
 .link img{
     margin-right: 30px;
+    width: 30px;
 }
 .title{
     font-family: 'Poppins', sans-serif ;
@@ -24,4 +25,14 @@
     height: 48px;
     background: #ECECF9;
     align-items: center;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.search > form {
+    margin: 15px 0;
 }

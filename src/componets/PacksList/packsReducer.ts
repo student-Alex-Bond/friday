@@ -132,7 +132,7 @@ export const packsReducer = (
       return state;
   }
 };
-export const getPacks = (packs: any) =>
+export const getPacks = (packs: CardsPackType[]) =>
   ({ type: GET_PACKS, payload: { packs } } as const);
 
 export const setMinMaxContCards = (values: number[]) =>

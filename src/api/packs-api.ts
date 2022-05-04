@@ -46,7 +46,13 @@ export const packsApi = {
 
 export const cardsApi = {
   getCard(state: InitialStateType) {
-    const config = { cardsPack_id: state.cardsPack_id };
+    const config = {
+      cardsPack_id: state.cardsPack_id,
+      cardAnswer: state.valueSearchAnswer,
+      cardQuestion: state.valueSearchQuestion,
+      pageCount: state.pageCountCards,
+      sortCards: state.sortCards,
+    };
     return instance.get('/cards/card', { params: config });
   },
 };

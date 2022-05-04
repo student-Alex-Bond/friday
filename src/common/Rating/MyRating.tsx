@@ -17,4 +17,5 @@ const MyRating: FC<MyRatingType> = ({ value }) => (
     <Rating name="read-only" value={value} readOnly />
   </Box>
 );
+
 export { MyRating };
