@@ -18,6 +18,7 @@ export type InitialStateType = {
   valueSearchAnswer: string;
   pageCountCards: number;
   sortCards: string;
+  newNamePack: string;
 };
 export type ActionType =
   | SetPackNameType
@@ -28,7 +29,8 @@ export type ActionType =
   | SetValueSearchQuestionType
   | SetValueSearchAnswerType
   | SetPageCountCardsType
-  | SetSortCardsType;
+  | SetSortCardsType
+  | addedNewPackType;
 
 export type CardType = {
   answer: string;
@@ -58,6 +60,7 @@ const initialState = {
   valueSearchAnswer: '',
   pageCountCards: 0,
   sortCards: '0grade',
+  newNamePack: '',
 };
 
 const SET_PACK_NAME = 'cards/SET-PACK-NAME';
@@ -67,6 +70,7 @@ const SET_VALUE_SEARCH_QUESTION = 'cards/SET-VALUE-SEARCH-QUESTION';
 const SET_VALUE_SEARCH_ANSWER = 'cards/SET-VALUE-SEARCH-ANSWER';
 const SET_PAGE_COUNT_CARDS = 'cards/SET-PAGE-COUNT-CARDS';
 const SET_METHOD_SORT = 'cards/SET-METHOD-SORT';
+const NEW_PACK_NAME = 'cards/NEW-PACK-NAME';
 
 export type SetPackNameType = ReturnType<typeof setPackName>;
 export type SetPackNameIDType = ReturnType<typeof setPackNameID>;
@@ -75,6 +79,7 @@ export type SetValueSearchQuestionType = ReturnType<typeof setValueSearchQuestio
 export type SetValueSearchAnswerType = ReturnType<typeof setValueSearchAnswer>;
 export type SetPageCountCardsType = ReturnType<typeof setPageCountCards>;
 export type SetSortCardsType = ReturnType<typeof setSortCards>;
+export type addedNewPackType = ReturnType<typeof addedNewName>;
 
 export const packItemReducer = (
   state: InitialStateType = initialState,
@@ -95,6 +100,8 @@ export const packItemReducer = (
       return { ...state, pageCountCards: action.payload.value };
     case SET_METHOD_SORT:
       return { ...state, sortCards: action.payload.methodSort };
+    case NEW_PACK_NAME:
+      return { ...state, newNamePack: action.payload.name };
     default:
       return state;
   }
@@ -114,6 +121,8 @@ export const setPageCountCards = (value: number) =>
   ({ type: SET_PAGE_COUNT_CARDS, payload: { value } } as const);
 export const setSortCards = (methodSort: string) =>
   ({ type: SET_METHOD_SORT, payload: { methodSort } } as const);
+export const addedNewName = (name: string) =>
+  ({ type: NEW_PACK_NAME, payload: { name } } as const);
 export const getCards =
   () => (dispatch: Dispatch<ActionType>, getState: () => RootState) => {
     dispatch(setAppStatus('loading'));

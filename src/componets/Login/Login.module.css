@@ -31,19 +31,6 @@
     text-transform: capitalize;
 }
 
-.inputPassWrapper {
-    width: 350px;
-}
-
-.email {
-    width: 350px;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid #24254A;
-    background: #F9F9FE;
-    font-size: 20px;
-    margin-bottom: 5px;
-}
 
 .label {
     display: block;

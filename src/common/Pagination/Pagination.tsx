@@ -25,9 +25,9 @@ const Pagination: FC<PaginationType> = memo(({ currentPage, totalCount }) => {
     }
     return pages;
   };
+  const firstPage = 1;
   const pages = useMemo(() => fillArrayOfValues(), [pagesCount]);
-  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  const [portionNumber, setPortionNumber] = useState<number>(1);
+  const [portionNumber, setPortionNumber] = useState<number>(firstPage);
   const leftPortionPageNumber = portionNumber;
   const rightPortionPageNUmber = portionNumber + pageSize;
   const prevPortion = (): void => {

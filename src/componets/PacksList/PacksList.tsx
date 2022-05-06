@@ -52,21 +52,32 @@ const PacksList: FC = memo(() => {
     [valueSearchInput],
   );
   useEffect(() => {
-    console.log('render searchInput');
     searchPackName(valueSearchInput);
   }, [valueSearchInput]);
   useEffect(() => {
-    console.log('render useEffect');
     dispatch(getPacksTC());
-  }, [pageCount, currentPage, packName, haveId, sortPack]);
-  console.log('render');
+  }, [sortPack, packName, haveId, currentPage, pageCount]);
+
   const [isView, setIsView] = useState<boolean>(false);
   const viewModal = (): void => {
     setIsView(true);
   };
   return (
     <MainContainer>
-      <ModalWindow isView={isView} setIsView={setIsView} />
+      <ModalWindow
+        addedNewPack={() => {}}
+        title="Add new pack"
+        isView={isView}
+        setIsView={setIsView}
+      >
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label className={classes.label}>
+          Name pack
+          <div style={{ width: '100%' }}>
+            <input type="text" />
+          </div>
+        </label>
+      </ModalWindow>
       <LeftContainer>
         <h2 className={classes.title}>Show packs cards</h2>
         <PrivateOrPublicPacks />
@@ -99,7 +110,7 @@ const PacksList: FC = memo(() => {
         <div className={classes.countPage}>
           <Pagination currentPage={currentPage} totalCount={cardsCountTotalCount} />
           <span>Show</span>
-          <Select page={String(pageCount)} />
+          <Select numberOfPages={String(pageCount)} />
           <span>Card per Page</span>
         </div>
       </div>

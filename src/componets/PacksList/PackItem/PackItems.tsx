@@ -36,15 +36,18 @@ const PackItems: FC = memo(() => {
   const valueSearchAnswer = useSelector<RootState, string>(
     state => state.cards.valueSearchAnswer,
   );
+
   const changeMethodSort = (methodSort: string): void => {
     dispatch(setSortCards(`${methodSort}grade`));
   };
   useEffect(() => {
-    dispatch(getCards());
+    if (cardsPackID === '') {
+      navigate('/packs-list');
+    } else {
+      dispatch(getCards());
+    }
   }, [packName, valueSearchAnswer, valueSearchQuestion, sortCards]);
-  if (cardsPackID === '') {
-    navigate('/packs-list');
-  }
+
   const goBack = (): void => {
     const onePageBack = -1;
     if (status === 'loading') {
@@ -110,7 +113,7 @@ const PackItems: FC = memo(() => {
             <SortedButton sortedPacks={sortCards} changeMethodSort={changeMethodSort} />
           </div>
         </div>
-        <div style={{ overflow: 'auto' }}>
+        <div style={{ overflowY: 'auto', height: '350px' }}>
           {cards.map(card => (
             <CardItem key={card.created} card={card} />
           ))}

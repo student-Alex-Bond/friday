@@ -9,12 +9,12 @@ import classes from './Select.module.css';
 export const countOfPages = ['5', '10', '15'];
 
 type SelectType = {
-  page: string;
+  numberOfPages: string;
 };
 
-const Select: FC<SelectType> = ({ page }) => {
+const Select: FC<SelectType> = ({ numberOfPages }) => {
   const dispatch = useDispatch();
-  const [option, setOption] = useState<string>(page);
+  const [option, setOption] = useState<string>(numberOfPages);
   const currentSelectIndex = (event: ChangeEvent<HTMLSelectElement>): void => {
     const selectIndex = event.currentTarget.options.selectedIndex;
     setOption(countOfPages[selectIndex]);

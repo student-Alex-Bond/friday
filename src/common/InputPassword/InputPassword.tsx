@@ -25,17 +25,20 @@ const InputPassword: FC<InputPasswordType> = ({ name, value, onChange }) => {
 
   return (
     <div className={classes.container}>
-      <span className={classes.label}>Password</span>
       <div className={classes.imgWrapper}>
-        <input
-          onChange={onChange}
-          value={value}
-          name={name}
-          autoComplete="true"
-          type={typeButton}
-          className={classes.password}
-          placeholder="enter password"
-        />
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label className={classes.label}>
+          Password
+          <input
+            onChange={onChange}
+            value={value}
+            name={name}
+            autoComplete="true"
+            type={typeButton}
+            className={classes.password}
+            placeholder="enter password"
+          />
+        </label>
         <button type="button" className={classes.btn} onClick={onClickShowPassword}>
           <img className={classes.eye} src={showEye} alt="eye" />
         </button>

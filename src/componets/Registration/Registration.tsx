@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { InputText } from '../../common/InputText';
 import { RootState } from '../../store/store';
 
 import { AddedUserType, createUserTC } from './registerReducer';
@@ -30,7 +31,7 @@ const Registration: FC = () => {
     validate: values => {
       const errors = {};
 
-      const passwordLength = 6;
+      const passwordLength = 7;
       if (!values.email) {
         return {
           email: 'email is required',
@@ -47,7 +48,7 @@ const Registration: FC = () => {
       }
       if (values.password.length < passwordLength) {
         return {
-          password: 'Password must be more than 6 characters',
+          password: 'Password must be more than 7 characters',
         };
       }
       if (values.password !== values.confirmPassword) {
@@ -72,18 +73,14 @@ const Registration: FC = () => {
       <form className={classes.form} onSubmit={formik.handleSubmit}>
         <h1>Learn English</h1>
         <h2>Sing Up</h2>
-        <div style={{ marginBottom: '5px' }}>
-          <span className={classes.label}>Email</span>
-          <input
-            type="text"
-            className={classes.email}
-            placeholder="enter email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            name="email"
-          />
-          <TextError value={formik.errors.email} touched={formik.touched.email} />
-        </div>
+        <InputText
+          name="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          title="Email"
+          placeholder="enter email"
+        />
+        <TextError value={formik.errors.email} touched={formik.touched.email} />
         <div style={{ marginBottom: '5px', width: '100%' }}>
           <InputPassword
             name="password"

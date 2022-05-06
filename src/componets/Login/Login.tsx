@@ -4,7 +4,8 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { RootState } from '../../store/store';
+import { InputText } from '../../common/InputText';
+import { RootState } from '../../store';
 
 import { loginUserTC, LoginUserType } from './actions';
 import classes from './Login.module.css';
@@ -77,26 +78,21 @@ const Login: FC = memo(() => {
         </div>
         <div />
         <span style={{ fontSize: '12px' }}>1qazxcvBG</span>
-        <div>
-          <span className={classes.label}>Email</span>
-          <input
-            name="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            type="text"
-            className={classes.email}
-            placeholder="enter email"
-          />
-          <TextError value={formik.errors.email} touched={formik.touched.email} />
-        </div>
-        <div className={classes.inputPassWrapper}>
-          <InputPassword
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-          />
-          <TextError value={formik.errors.password} touched={formik.touched.password} />
-        </div>
+        <InputText
+          name="email"
+          value={formik.values.email}
+          placeholder="enter email"
+          onChange={formik.handleChange}
+          title="Email"
+        />
+        <TextError value={formik.errors.email} touched={formik.touched.email} />
+
+        <InputPassword
+          name="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+        />
+        <TextError value={formik.errors.password} touched={formik.touched.password} />
         <div className={classes.forgotWrapper}>
           <div className={classes.checkbox}>
             <input

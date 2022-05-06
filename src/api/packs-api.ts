@@ -42,6 +42,9 @@ export const packsApi = {
     }&pageCount=${queryParams.pageCount}`;
     return instance.get(stringRequest);
   },
+  createPack(name: string) {
+    return instance.post('/cards/pack', { name });
+  },
 };
 
 export const cardsApi = {
