@@ -1,13 +1,18 @@
 import { Dispatch } from 'react';
 
-import { cardsApi } from '../../../api/packs-api';
+import { ThunkDispatch } from 'redux-thunk';
+
+import { cardsApi, packsApi } from '../../../api/packs-api';
 import { RootState } from '../../../store';
 import {
   setAppStatus,
   SetAppStatusType,
   setError,
   SetErrorType,
+  setMessage,
+  SetMessageType,
 } from '../../App/app-reducer';
+import { getPacksTC } from '../packsReducer';
 
 export type InitialStateType = {
   packName: string;
@@ -30,7 +35,8 @@ export type ActionType =
   | SetValueSearchAnswerType
   | SetPageCountCardsType
   | SetSortCardsType
-  | addedNewPackType;
+  | addedNewPackType
+  | SetMessageType;
 
 export type CardType = {
   answer: string;
@@ -138,5 +144,26 @@ export const getCards =
           : `${e.message}, more details in the console`;
         dispatch(setError(error));
         dispatch(setAppStatus('failed'));
+      });
+  };
+export const addedNewPack =
+  () =>
+  (dispatch: ThunkDispatch<RootState, void, ActionType>, getState: () => RootState) => {
+    dispatch(setAppStatus('loading'));
+    packsApi
+      .createPack(getState().cards.newNamePack)
+      .then(response => {
+        dispatch(setMessage(response.statusText));
+        dispatch(setAppStatus('succeeded'));
+      })
+      .catch(e => {
+        const error = e.response
+          ? e.response.data.error
+          : `${e.message}, more details in the console`;
+        dispatch(setError(error));
+        dispatch(setAppStatus('failed'));
+      })
+      .then(() => {
+        dispatch(getPacksTC());
       });
   };

@@ -1,11 +1,14 @@
 import React, { FC, memo, useEffect, useMemo, useState } from 'react';
 
+import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { InputText } from '../../common/InputText';
 import { ModalWindow } from '../../common/ModalWindow';
 import { RootState } from '../../store';
 import { RequestStatusType } from '../App/app-reducer';
 
+import { addedNewName, addedNewPack } from './PackItem/pack-item-reducer';
 import classes from './PacksList.module.css';
 import { CardsPackType, getPacksTC, setSearchValue } from './packsReducer';
 import {
@@ -62,21 +65,42 @@ const PacksList: FC = memo(() => {
   const viewModal = (): void => {
     setIsView(true);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      newNamePack: '',
+    },
+    validate: values => {
+      const errors = {};
+
+      if (!values.newNamePack) {
+        return {
+          newNamePack: 'newNamePack is required',
+        };
+      }
+      return errors;
+    },
+    onSubmit: values => {
+      dispatch(addedNewName(values.newNamePack));
+      setIsView(false);
+      dispatch(addedNewPack());
+    },
+  });
   return (
     <MainContainer>
       <ModalWindow
-        addedNewPack={() => {}}
+        addedNewPack={formik.handleSubmit}
         title="Add new pack"
         isView={isView}
         setIsView={setIsView}
       >
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label className={classes.label}>
-          Name pack
-          <div style={{ width: '100%' }}>
-            <input type="text" />
-          </div>
-        </label>
+        <InputText
+          name="newNamePack"
+          value={formik.values.newNamePack}
+          onChange={formik.handleChange}
+          title="New name"
+          placeholder="enter name pack"
+        />
       </ModalWindow>
       <LeftContainer>
         <h2 className={classes.title}>Show packs cards</h2>

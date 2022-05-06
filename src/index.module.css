@@ -12,9 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-input{
-  color: #000000;
-}
-input:focus{
-  color: #000000;
-}

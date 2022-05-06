@@ -43,7 +43,7 @@ export const packsApi = {
     return instance.get(stringRequest);
   },
   createPack(name: string) {
-    return instance.post('/cards/pack', { name });
+    return instance.post('cards/pack', { cardsPack: { name } });
   },
 };
 

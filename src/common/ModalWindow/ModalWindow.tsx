@@ -28,9 +28,9 @@ const ModalWindow: FC<ModalWindowType> = ({
             &times;
           </button>
         </div>
-        <hr style={{ backgroundColor: '#EDF0F6', margin: '5px 0' }} />
+        <hr style={{ backgroundColor: '#EDF0F6', margin: '15px 0' }} />
         <div style={{ width: '100%' }}>{children}</div>
-        <hr style={{ backgroundColor: '#EDF0F6', margin: '5px 0 15px 0' }} />
+        <hr style={{ backgroundColor: '#EDF0F6', margin: '15px 0 15px 0' }} />
         <div className={classes.btnContainer}>
           <button onClick={closeWindow} type="button">
             Cancel
