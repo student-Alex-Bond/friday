@@ -29,7 +29,7 @@ const RangeSlider: FC = () => {
         onChange={handleChange}
         valueLabelDisplay="on"
         getAriaValueText={valuetext}
-        max={150}
+        max={20}
       />
     </Box>
   );

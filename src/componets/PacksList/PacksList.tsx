@@ -86,6 +86,7 @@ const PacksList: FC = memo(() => {
       dispatch(addedNewPack());
     },
   });
+  const zero = 0;
   return (
     <MainContainer>
       <ModalWindow
@@ -128,7 +129,7 @@ const PacksList: FC = memo(() => {
           </div>
         </div>
         <div className={classes.notFound}>
-          {haveId !== undefined && <div>You don&#39;t have decks</div>}
+          {cardsPacks.length === zero && <div>You don&#39;t have decks</div>}
         </div>
         <Table cardsPacks={cardsPacks} />
         <div className={classes.countPage}>

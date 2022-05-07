@@ -39,7 +39,7 @@ export type queryParamsType = {
   sortPacks: string;
 };
 
-const firstNumber = 1;
+const firstNumber = 0;
 const lastNumber = 12;
 export const initialState = {
   cardsPacks: [],

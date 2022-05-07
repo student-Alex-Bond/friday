@@ -21,9 +21,6 @@ type TableType = {
 const Table: FC<TableType> = memo(({ cardsPacks }) => {
   const dispatch = useDispatch();
   const sortedPacks = useSelector<RootState, string>(selectedSortPack);
-  const userID = useSelector<RootState, string | undefined>(
-    state => state.cardsPacks.queryParams.haveID,
-  );
   // eslint-disable-next-line no-underscore-dangle
   const myID = useSelector<RootState, string | undefined>(state => state.login.user?._id);
   const changeMethodSort = (methodSort: string): void => {
@@ -76,19 +73,31 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
                   <td>{createdDate}</td>
                   <td>{pack.user_name}</td>
                   <td colSpan={2}>
-                    {userID === myID && (
-                      <>
-                        <button className={classes.btn} type="button">
-                          Delete
-                        </button>
-                        <button className={classes.btn} type="button">
-                          Edit
-                        </button>
-                      </>
-                    )}
-                    <button className={classes.btn} type="button">
-                      Learn
-                    </button>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        paddingRight: '15px',
+                      }}
+                    >
+                      {pack.user_id === myID && (
+                        <>
+                          <button
+                            style={{ color: '#FFFFFF', background: '#F1453D' }}
+                            className={classes.btn}
+                            type="button"
+                          >
+                            Delete
+                          </button>
+                          <button className={classes.btn} type="button">
+                            Edit
+                          </button>
+                        </>
+                      )}
+                      <button className={classes.btn} type="button">
+                        Learn
+                      </button>
+                    </div>
                   </td>
                 </tr>
               );
