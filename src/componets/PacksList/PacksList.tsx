@@ -34,6 +34,10 @@ import { Select } from 'common/Select';
 import { PrivateOrPublicPacks } from 'componets/PacksList/PrivateOrPublicPacks';
 import { Table } from 'componets/PacksList/Table';
 
+export type isViewType = {
+  showModalNewPack: boolean;
+};
+
 const PacksList: FC = memo(() => {
   const dispatch = useDispatch();
   const status = useSelector<RootState, RequestStatusType>(selectedStatusApp);
@@ -61,9 +65,11 @@ const PacksList: FC = memo(() => {
     dispatch(getPacksTC());
   }, [sortPack, packName, haveId, currentPage, pageCount]);
 
-  const [isView, setIsView] = useState<boolean>(false);
+  const [isView, setIsView] = useState<isViewType>({
+    showModalNewPack: false,
+  });
   const viewModal = (): void => {
-    setIsView(true);
+    setIsView({ ...isView, showModalNewPack: true });
   };
 
   const formik = useFormik({
@@ -82,7 +88,7 @@ const PacksList: FC = memo(() => {
     },
     onSubmit: values => {
       dispatch(addedNewName(values.newNamePack));
-      setIsView(false);
+      setIsView({ ...isView, showModalNewPack: false });
       dispatch(addedNewPack());
     },
   });

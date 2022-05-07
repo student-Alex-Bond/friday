@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 
+import { isViewType } from '../../componets/PacksList/PacksList';
+
 import classes from './ModalWindow.module.css';
 
 type ModalWindowType = {
-  isView: boolean;
-  setIsView: (value: boolean) => void;
+  isView: isViewType;
+  setIsView: (isView: isViewType) => void;
   title: string;
   addedNewPack: () => void;
 };
@@ -16,9 +18,11 @@ const ModalWindow: FC<ModalWindowType> = ({
   children,
 }) => {
   const closeWindow = (): void => {
-    setIsView(false);
+    setIsView({ ...isView, showModalNewPack: false });
   };
-  const modeDisplay = isView ? { display: 'block' } : { display: 'none' };
+  const modeDisplay = isView.showModalNewPack
+    ? { display: 'block' }
+    : { display: 'none' };
   return (
     <>
       <div style={modeDisplay} className={classes.message}>

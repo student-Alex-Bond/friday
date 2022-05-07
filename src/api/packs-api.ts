@@ -46,6 +46,9 @@ export const packsApi = {
   createPack(name: string) {
     return instance.post('cards/pack', { cardsPack: { name } });
   },
+  deletePack(id: string) {
+    return instance.delete('/cards/pack', { params: { id } });
+  },
 };
 
 export const cardsApi = {

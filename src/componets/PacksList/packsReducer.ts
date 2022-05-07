@@ -1,5 +1,7 @@
 import { Dispatch } from 'react';
 
+import { ThunkDispatch } from 'redux-thunk';
+
 import { packsApi } from '../../api/packs-api';
 import { RootState } from '../../store';
 import {
@@ -109,8 +111,10 @@ export const packsReducer = (
         ...state,
         queryParams: { ...state.queryParams, currentPage: action.payload.currentPage },
       };
-    case GET_PACKS:
+    case GET_PACKS: {
       return { ...state, cardsPacks: action.payload.packs };
+    }
+
     case SET_MY_ID:
       return {
         ...state,
@@ -174,5 +178,26 @@ export const getPacksTC =
           : `${e.message}, more details in the console`;
         dispatch(setError(error));
         dispatch(setAppStatus('failed'));
+      });
+  };
+
+export const deleteCardPack =
+  (id: string) => (dispatch: ThunkDispatch<RootState, void, ActionsType>) => {
+    dispatch(setAppStatus('loading'));
+    packsApi
+      .deletePack(id)
+      .then(() => {
+        dispatch(setAppStatus('succeeded'));
+      })
+      .catch(e => {
+        const error = e.response
+          ? e.response.data.error
+          : `${e.message}, more details in the console`;
+        dispatch(setError(error));
+        dispatch(setAppStatus('failed'));
+      })
+      .then(() => {
+        dispatch(getPacksTC());
+        dispatch(setAppStatus('succeeded'));
       });
   };

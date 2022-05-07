@@ -10,7 +10,7 @@ import {
   setPackNameID,
   setPageCountCards,
 } from '../PackItem/pack-item-reducer';
-import { CardsPackType, setSortPacks } from '../packsReducer';
+import { CardsPackType, deleteCardPack, setSortPacks } from '../packsReducer';
 import { selectedSortPack } from '../selectors';
 
 import classes from './Table.module.css';
@@ -56,6 +56,10 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
           <tbody>
             {cardsPacks.map(pack => {
               const createdDate = new Date(pack.created).toLocaleDateString();
+              const deletePack = (): void => {
+                // eslint-disable-next-line no-underscore-dangle
+                dispatch(deleteCardPack(pack._id));
+              };
               const goCurrentPackName = (): void => {
                 dispatch(setPackName(pack.name));
                 // eslint-disable-next-line no-underscore-dangle
@@ -83,6 +87,7 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
                       {pack.user_id === myID && (
                         <>
                           <button
+                            onClick={deletePack}
                             style={{ color: '#FFFFFF', background: '#F1453D' }}
                             className={classes.btn}
                             type="button"
