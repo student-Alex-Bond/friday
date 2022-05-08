@@ -1,28 +1,23 @@
 import React, { FC } from 'react';
 
-import { isViewType } from '../../componets/PacksList/PacksList';
-
 import classes from './ModalWindow.module.css';
 
 type ModalWindowType = {
-  isView: isViewType;
-  setIsView: (isView: isViewType) => void;
+  isView: boolean;
   title: string;
-  addedNewPack: () => void;
+  clickActionCallback: () => void;
+  nameButton: string;
+  closeWindow: () => void;
 };
 const ModalWindow: FC<ModalWindowType> = ({
-  addedNewPack,
+  clickActionCallback,
   isView,
   title,
-  setIsView,
+  closeWindow,
   children,
+  nameButton,
 }) => {
-  const closeWindow = (): void => {
-    setIsView({ ...isView, showModalNewPack: false });
-  };
-  const modeDisplay = isView.showModalNewPack
-    ? { display: 'block' }
-    : { display: 'none' };
+  const modeDisplay = isView ? { display: 'block' } : { display: 'none' };
   return (
     <>
       <div style={modeDisplay} className={classes.message}>
@@ -39,8 +34,8 @@ const ModalWindow: FC<ModalWindowType> = ({
           <button onClick={closeWindow} type="button">
             Cancel
           </button>
-          <button onClick={addedNewPack} type="button">
-            Save
+          <button onClick={clickActionCallback} type="button">
+            {nameButton}
           </button>
         </div>
       </div>

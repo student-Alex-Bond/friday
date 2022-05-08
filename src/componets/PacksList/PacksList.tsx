@@ -10,7 +10,13 @@ import { RequestStatusType } from '../App/app-reducer';
 
 import { addedNewName, addedNewPack } from './PackItem/pack-item-reducer';
 import classes from './PacksList.module.css';
-import { CardsPackType, getPacksTC, setSearchValue } from './packsReducer';
+import {
+  CardsPackType,
+  deleteCardPack,
+  deletePackType,
+  getPacksTC,
+  setSearchValue,
+} from './packsReducer';
 import {
   selectedCardsCountTotalCount,
   selectedCardsPacks,
@@ -36,6 +42,7 @@ import { Table } from 'componets/PacksList/Table';
 
 export type isViewType = {
   showModalNewPack: boolean;
+  showModalDeletePack: boolean;
 };
 
 const PacksList: FC = memo(() => {
@@ -51,6 +58,9 @@ const PacksList: FC = memo(() => {
   );
   const valueSearchInput = useSelector<RootState, string>(selectedValueSearchInput);
   const sortPack = useSelector<RootState, string>(selectedSortPack);
+  const infoDeletePack = useSelector<RootState, deletePackType>(
+    state => state.cardsPacks.deletePack,
+  );
   const searchPackName = useMemo(
     () =>
       (value: string): void => {
@@ -67,11 +77,24 @@ const PacksList: FC = memo(() => {
 
   const [isView, setIsView] = useState<isViewType>({
     showModalNewPack: false,
+    showModalDeletePack: false,
   });
   const viewModal = (): void => {
     setIsView({ ...isView, showModalNewPack: true });
   };
-
+  const closeWindow = (): void => {
+    setIsView({ ...isView, showModalNewPack: false });
+  };
+  const closeWindowDeletePack = (): void => {
+    setIsView({ ...isView, showModalDeletePack: false });
+  };
+  const deletePack = (): void => {
+    dispatch(deleteCardPack(infoDeletePack.id));
+    setIsView({ ...isView, showModalDeletePack: false });
+  };
+  const showModalDeletePack = (): void => {
+    setIsView({ ...isView, showModalDeletePack: true });
+  };
   const formik = useFormik({
     initialValues: {
       newNamePack: '',
@@ -96,10 +119,11 @@ const PacksList: FC = memo(() => {
   return (
     <MainContainer>
       <ModalWindow
-        addedNewPack={formik.handleSubmit}
+        clickActionCallback={formik.handleSubmit}
         title="Add new pack"
-        isView={isView}
-        setIsView={setIsView}
+        isView={isView.showModalNewPack}
+        closeWindow={closeWindow}
+        nameButton="Save"
       >
         <InputText
           name="newNamePack"
@@ -108,6 +132,20 @@ const PacksList: FC = memo(() => {
           title="New name"
           placeholder="enter name pack"
         />
+      </ModalWindow>
+      <ModalWindow
+        isView={isView.showModalDeletePack}
+        title="Delete Pack"
+        clickActionCallback={deletePack}
+        nameButton="delete"
+        closeWindow={closeWindowDeletePack}
+      >
+        <div style={{ padding: '0 15px', display: 'flex', alignItems: 'center' }}>
+          <span className={classes.question}>
+            Do you really want to remove {infoDeletePack.name}? All cards will be excluded
+            from this course.
+          </span>
+        </div>
       </ModalWindow>
       <LeftContainer>
         <h2 className={classes.title}>Show packs cards</h2>
@@ -137,7 +175,7 @@ const PacksList: FC = memo(() => {
         <div className={classes.notFound}>
           {cardsPacks.length === zero && <div>You don&#39;t have decks</div>}
         </div>
-        <Table cardsPacks={cardsPacks} />
+        <Table cardsPacks={cardsPacks} showModalDeletePack={showModalDeletePack} />
         <div className={classes.countPage}>
           <Pagination currentPage={currentPage} totalCount={cardsCountTotalCount} />
           <span>Show</span>

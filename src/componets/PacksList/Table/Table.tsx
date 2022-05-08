@@ -10,15 +10,16 @@ import {
   setPackNameID,
   setPageCountCards,
 } from '../PackItem/pack-item-reducer';
-import { CardsPackType, deleteCardPack, setSortPacks } from '../packsReducer';
+import { CardsPackType, setParamsDeletePack, setSortPacks } from '../packsReducer';
 import { selectedSortPack } from '../selectors';
 
 import classes from './Table.module.css';
 
 type TableType = {
   cardsPacks: CardsPackType[];
+  showModalDeletePack: () => void;
 };
-const Table: FC<TableType> = memo(({ cardsPacks }) => {
+const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
   const dispatch = useDispatch();
   const sortedPacks = useSelector<RootState, string>(selectedSortPack);
   // eslint-disable-next-line no-underscore-dangle
@@ -58,7 +59,8 @@ const Table: FC<TableType> = memo(({ cardsPacks }) => {
               const createdDate = new Date(pack.created).toLocaleDateString();
               const deletePack = (): void => {
                 // eslint-disable-next-line no-underscore-dangle
-                dispatch(deleteCardPack(pack._id));
+                dispatch(setParamsDeletePack({ name: pack.name, id: pack._id }));
+                showModalDeletePack();
               };
               const goCurrentPackName = (): void => {
                 dispatch(setPackName(pack.name));

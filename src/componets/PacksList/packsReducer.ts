@@ -32,6 +32,7 @@ export type CardsPackType = {
   _id: string;
 };
 
+export type deletePackType = { name: string; id: string };
 export type queryParamsType = {
   minMaxContCards: number[];
   currentPage: number;
@@ -54,6 +55,7 @@ export const initialState = {
     sortPacks: '0updated',
   },
   cardPacksTotalCount: 0,
+  deletePack: {} as deletePackType,
 };
 
 export const GET_PACKS = 'packs/GET-PACKS';
@@ -64,11 +66,13 @@ export const SET_MY_ID = 'packs/SET-MY-ID';
 export const SET_SEARCH_INPUT = 'packs/SET-SEARCH-INPUT';
 export const SET_TOTAL_COUNT = 'packs/SET-TOTAL-COUNT';
 export const SET_SORT_PACKS = 'packs/SET-SORT-PACKS';
+export const SET_PARAMS_DELETE_PACK = 'packs/SET-PARAMS-DELETE-PACK';
 
 export type InitialStateType = {
   cardsPacks: CardsPackType[];
   queryParams: queryParamsType;
   cardPacksTotalCount: number;
+  deletePack: deletePackType;
 };
 export type GetPacksType = ReturnType<typeof getPacks>;
 export type SetMinMaxContCardsType = ReturnType<typeof setMinMaxContCards>;
@@ -78,6 +82,7 @@ export type SetMyIdType = ReturnType<typeof setMyId>;
 export type SetSearchValueType = ReturnType<typeof setSearchValue>;
 export type SetCardPacksTotalCountType = ReturnType<typeof setCardPacksTotalCount>;
 export type SetSortPacksType = ReturnType<typeof setSortPacks>;
+export type SetParamsDeletePackType = ReturnType<typeof setParamsDeletePack>;
 export type ActionsType =
   | GetPacksType
   | SetMessageType
@@ -89,7 +94,8 @@ export type ActionsType =
   | SetErrorType
   | SetAppStatusType
   | SetCardPacksTotalCountType
-  | SetSortPacksType;
+  | SetSortPacksType
+  | SetParamsDeletePackType;
 
 export const packsReducer = (
   state: InitialStateType = initialState,
@@ -132,6 +138,8 @@ export const packsReducer = (
         ...state,
         queryParams: { ...state.queryParams, sortPacks: action.payload.sort },
       };
+    case SET_PARAMS_DELETE_PACK:
+      return { ...state, deletePack: action.payload.params };
     default:
       return state;
   }
@@ -160,6 +168,8 @@ export const setCardPacksTotalCount = (totalCount: number) =>
   ({ type: SET_TOTAL_COUNT, payload: { totalCount } } as const);
 export const setSortPacks = (sort: string) =>
   ({ type: SET_SORT_PACKS, payload: { sort } } as const);
+export const setParamsDeletePack = (params: deletePackType) =>
+  ({ type: SET_PARAMS_DELETE_PACK, payload: { params } } as const);
 
 export const getPacksTC =
   () => (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {
