@@ -137,13 +137,13 @@ const PacksList: FC = memo(() => {
         isView={isView.showModalDeletePack}
         title="Delete Pack"
         clickActionCallback={deletePack}
-        nameButton="delete"
+        nameButton="Delete"
         closeWindow={closeWindowDeletePack}
       >
         <div style={{ padding: '0 15px', display: 'flex', alignItems: 'center' }}>
           <span className={classes.question}>
-            Do you really want to remove {infoDeletePack.name}? All cards will be excluded
-            from this course.
+            Do you really want to remove pack <strong>{infoDeletePack.name}</strong>? All
+            cards will be excluded from this course.
           </span>
         </div>
       </ModalWindow>

@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import { Button } from '../Button';
+
 import classes from './ModalWindow.module.css';
 
 type ModalWindowType = {
@@ -18,6 +20,7 @@ const ModalWindow: FC<ModalWindowType> = ({
   nameButton,
 }) => {
   const modeDisplay = isView ? { display: 'block' } : { display: 'none' };
+  // @ts-ignore
   return (
     <>
       <div style={modeDisplay} className={classes.message}>
@@ -34,9 +37,11 @@ const ModalWindow: FC<ModalWindowType> = ({
           <button onClick={closeWindow} type="button">
             Cancel
           </button>
-          <button onClick={clickActionCallback} type="button">
-            {nameButton}
-          </button>
+          <div className={classes.btnSave}>
+            <Button type={undefined} color="#21268F" onClick={clickActionCallback}>
+              {nameButton}
+            </Button>
+          </div>
         </div>
       </div>
       <button
