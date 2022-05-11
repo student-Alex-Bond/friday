@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import { SortedButton } from '../../../common/SortedButton';
 import { RootState } from '../../../store';
+import { setCardsPackID } from '../AddNewCard/card-reducer';
 import {
   setPackName,
   setPackNameID,
@@ -67,6 +68,8 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                 // eslint-disable-next-line no-underscore-dangle
                 dispatch(setPackNameID(pack._id));
                 dispatch(setPageCountCards(pack.cardsCount));
+                // eslint-disable-next-line no-underscore-dangle
+                dispatch(setCardsPackID(pack._id));
               };
               return (
                 <tr className={classes.row} key={pack.created}>

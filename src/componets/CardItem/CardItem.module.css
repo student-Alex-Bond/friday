@@ -17,7 +17,21 @@
     font-weight: 400;
     font-size: 13px;
     color: #000000;
+    text-align: center;
 }
 .item:nth-child(even){
     background: #F8F7FD;
+}
+.btn {
+    color: #21268F;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    background: #D7D8EF;
+    padding: 5px;
+    border-radius: 2px;
+}
+.btn:first-child{
+    background: #F1453D;
+    color: #FFFFFF;
 }

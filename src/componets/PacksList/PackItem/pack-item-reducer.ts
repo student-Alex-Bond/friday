@@ -24,6 +24,7 @@ export type InitialStateType = {
   pageCountCards: number;
   sortCards: string;
   newNamePack: string;
+  packUserId: string;
 };
 export type ActionType =
   | SetPackNameType
@@ -35,8 +36,9 @@ export type ActionType =
   | SetValueSearchAnswerType
   | SetPageCountCardsType
   | SetSortCardsType
-  | addedNewPackType
-  | SetMessageType;
+  | AddedNewPackType
+  | SetMessageType
+  | SetPackUserIDType;
 
 export type CardType = {
   answer: string;
@@ -55,6 +57,7 @@ export type CardType = {
   type: string;
   updated: string;
   user_id: string;
+  _id: string;
 };
 
 const initialState = {
@@ -67,6 +70,7 @@ const initialState = {
   pageCountCards: 0,
   sortCards: '0grade',
   newNamePack: '',
+  packUserId: '',
 };
 
 const SET_PACK_NAME = 'cards/SET-PACK-NAME';
@@ -76,7 +80,8 @@ const SET_VALUE_SEARCH_QUESTION = 'cards/SET-VALUE-SEARCH-QUESTION';
 const SET_VALUE_SEARCH_ANSWER = 'cards/SET-VALUE-SEARCH-ANSWER';
 const SET_PAGE_COUNT_CARDS = 'cards/SET-PAGE-COUNT-CARDS';
 const SET_METHOD_SORT = 'cards/SET-METHOD-SORT';
-const NEW_PACK_NAME = 'cards/NEW-PACK-NAME';
+const SET_NEW_PACK_NAME = 'cards/NEW-PACK-NAME';
+const SET_PACK_USER_ID = 'cards/PACK-USER-ID';
 
 export type SetPackNameType = ReturnType<typeof setPackName>;
 export type SetPackNameIDType = ReturnType<typeof setPackNameID>;
@@ -85,7 +90,8 @@ export type SetValueSearchQuestionType = ReturnType<typeof setValueSearchQuestio
 export type SetValueSearchAnswerType = ReturnType<typeof setValueSearchAnswer>;
 export type SetPageCountCardsType = ReturnType<typeof setPageCountCards>;
 export type SetSortCardsType = ReturnType<typeof setSortCards>;
-export type addedNewPackType = ReturnType<typeof addedNewName>;
+export type AddedNewPackType = ReturnType<typeof addedNewName>;
+export type SetPackUserIDType = ReturnType<typeof setPackUserID>;
 
 export const packItemReducer = (
   state: InitialStateType = initialState,
@@ -106,8 +112,10 @@ export const packItemReducer = (
       return { ...state, pageCountCards: action.payload.value };
     case SET_METHOD_SORT:
       return { ...state, sortCards: action.payload.methodSort };
-    case NEW_PACK_NAME:
+    case SET_NEW_PACK_NAME:
       return { ...state, newNamePack: action.payload.name };
+    case SET_PACK_USER_ID:
+      return { ...state, packUserId: action.payload.id };
     default:
       return state;
   }
@@ -128,7 +136,9 @@ export const setPageCountCards = (value: number) =>
 export const setSortCards = (methodSort: string) =>
   ({ type: SET_METHOD_SORT, payload: { methodSort } } as const);
 export const addedNewName = (name: string) =>
-  ({ type: NEW_PACK_NAME, payload: { name } } as const);
+  ({ type: SET_NEW_PACK_NAME, payload: { name } } as const);
+export const setPackUserID = (id: string) =>
+  ({ type: SET_PACK_USER_ID, payload: { id } } as const);
 export const getCards =
   () => (dispatch: Dispatch<ActionType>, getState: () => RootState) => {
     dispatch(setAppStatus('loading'));
@@ -136,6 +146,7 @@ export const getCards =
       .getCard(getState().cards)
       .then(response => {
         dispatch(setCards(response.data.cards));
+        dispatch(setPackUserID(response.data.packUserId));
         dispatch(setAppStatus('succeeded'));
       })
       .catch(e => {

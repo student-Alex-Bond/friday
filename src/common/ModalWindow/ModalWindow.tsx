@@ -20,7 +20,6 @@ const ModalWindow: FC<ModalWindowType> = ({
   nameButton,
 }) => {
   const modeDisplay = isView ? { display: 'block' } : { display: 'none' };
-  // @ts-ignore
   return (
     <>
       <div style={modeDisplay} className={classes.message}>
@@ -38,7 +37,11 @@ const ModalWindow: FC<ModalWindowType> = ({
             Cancel
           </button>
           <div className={classes.btnSave}>
-            <Button type={undefined} color="#21268F" onClick={clickActionCallback}>
+            <Button
+              type={undefined}
+              color={nameButton === 'Delete' ? 'red' : '#21268F'}
+              onClick={clickActionCallback}
+            >
               {nameButton}
             </Button>
           </div>

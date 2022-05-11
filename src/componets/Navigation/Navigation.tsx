@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import { AddNewCard } from '../PacksList/AddNewCard/AddNewCard';
+
 import styles from './Navigation.module.css';
 
 import { Login } from 'componets/Login';
@@ -54,6 +56,7 @@ const Navigation: FC<NavigationPropsType> = () => (
       <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
       <Route key={8} path="profile/personal-info" element={<PersonalInfo />} />
       <Route key={9} path="packs-list/pack-item" element={<PackItems />} />
+      <Route key={10} path="packs-list/pack-item/add-new-card" element={<AddNewCard />} />
     </Routes>
   </div>
 );

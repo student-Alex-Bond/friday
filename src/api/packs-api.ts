@@ -4,7 +4,7 @@ import { LoginUserType } from '../componets/Login/actions';
 import { InitialStateType } from '../componets/PacksList/PackItem/pack-item-reducer';
 import { queryParamsType } from '../componets/PacksList/packsReducer';
 
-import { NewUserType, UpdateUserType } from './types';
+import { NewUserType, ResponseCardType, UpdateUserType } from './types';
 
 const instance = axios.create({
   baseURL: 'http://localhost:7542/2.0/' || process.env.REACT_APP_BACK_URL,
@@ -61,5 +61,16 @@ export const cardsApi = {
       sortCards: state.sortCards,
     };
     return instance.get('/cards/card', { params: config });
+  },
+  createNewCard(newCard: ResponseCardType) {
+    const params = {
+      cardsPack_id: newCard.cardsPack_id,
+      question: newCard.question,
+      answer: newCard.answer,
+    };
+    return instance.post('/cards/card', { card: params });
+  },
+  deleteCard(id: string) {
+    return instance.delete('/cards/card', { params: { id } });
   },
 };

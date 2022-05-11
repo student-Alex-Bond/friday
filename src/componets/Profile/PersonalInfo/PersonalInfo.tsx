@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { FormContainer } from '../../../common/FormContainer';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../store';
 import { setMessage } from '../../App/app-reducer';
 import { changePersonalInfoTC } from '../../Login/actions';
 

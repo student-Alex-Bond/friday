@@ -33,6 +33,34 @@
     border: none;
     cursor: pointer;
 }
+.search{
+    width: 100%;
+
+}
 .search > form {
     margin: 15px 0;
+}
+
+.btnAddNewCard{
+    width: 184px;
+    height: 36px;
+    margin-left: 40px;
+}
+.containerHeader{
+    display: flex;
+    flex: 2;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.messageEmptyCard{
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    opacity: 0.5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

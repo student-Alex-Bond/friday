@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { MyBackdrop } from '../../../common/BackDrop';
+import { Button } from '../../../common/Button';
 import { InputSearch } from '../../../common/InputSearch';
 import { MainContainer } from '../../../common/MainContainer';
 import { SortedButton } from '../../../common/SortedButton';
@@ -30,13 +31,17 @@ const PackItems: FC = memo(() => {
   const cards = useSelector<RootState, CardType[]>(selectedCards);
   const sortCards = useSelector<RootState, string>(state => state.cards.sortCards);
   const cardsPackID = useSelector<RootState, string>(state => state.cards.cardsPack_id);
+  // eslint-disable-next-line no-underscore-dangle
+  const myID = useSelector<RootState, string | undefined>(state => state.login.user?._id);
+  const packUserID = useSelector<RootState, string>(state => state.cards.packUserId);
+
   const valueSearchQuestion = useSelector<RootState, string>(
     state => state.cards.valueSearchQuestion,
   );
   const valueSearchAnswer = useSelector<RootState, string>(
     state => state.cards.valueSearchAnswer,
   );
-
+  const zeroArrayLength = 0;
   const changeMethodSort = (methodSort: string): void => {
     dispatch(setSortCards(`${methodSort}grade`));
   };
@@ -49,11 +54,10 @@ const PackItems: FC = memo(() => {
   }, [packName, valueSearchAnswer, valueSearchQuestion, sortCards]);
 
   const goBack = (): void => {
-    const onePageBack = -1;
     if (status === 'loading') {
       return;
     }
-    navigate(onePageBack);
+    navigate('/packs-list');
     dispatch(setValueSearchQuestion(''));
     dispatch(setValueSearchAnswer(''));
   };
@@ -77,6 +81,10 @@ const PackItems: FC = memo(() => {
     searchValueAnswer(valueSearchAnswer);
     searchValueQuestion(valueSearchQuestion);
   }, [valueSearchAnswer, valueSearchQuestion]);
+
+  const addNewCard = (): void => {
+    navigate('add-new-card');
+  };
   return (
     // const navigate = useNavigate();
     // const createdDate = new Date(cards.created).toLocaleDateString();
@@ -92,32 +100,53 @@ const PackItems: FC = memo(() => {
           </button>
           <span className={classes.title}>{packName}</span>
         </div>
-        <div className={classes.search}>
-          <InputSearch
-            initialValue={valueSearchQuestion}
-            getValueSearchInput={searchValueQuestion}
-            placeholder="search question"
-          />
-          <InputSearch
-            initialValue={valueSearchAnswer}
-            getValueSearchInput={searchValueAnswer}
-            placeholder="search answer"
-          />
-        </div>
-        <div className={classes.tableHeader}>
-          <div>Question</div>
-          <div>Answer</div>
-          <div>Lasted Update</div>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            Grade
-            <SortedButton sortedPacks={sortCards} changeMethodSort={changeMethodSort} />
+        <div className={classes.containerHeader}>
+          <div className={classes.search}>
+            <InputSearch
+              initialValue={valueSearchQuestion}
+              getValueSearchInput={searchValueQuestion}
+              placeholder="search question"
+            />
+            <InputSearch
+              initialValue={valueSearchAnswer}
+              getValueSearchInput={searchValueAnswer}
+              placeholder="search answer"
+            />
           </div>
+          {myID === packUserID ? (
+            <div className={classes.btnAddNewCard}>
+              <Button color="#21268F" type={undefined} onClick={addNewCard}>
+                Add new card
+              </Button>
+            </div>
+          ) : null}
         </div>
-        <div style={{ overflowY: 'auto', height: '350px' }}>
-          {cards.map(card => (
-            <CardItem key={card.created} card={card} />
-          ))}
-        </div>
+        {cards.length !== zeroArrayLength ? (
+          <>
+            <div className={classes.tableHeader}>
+              <div>Question</div>
+              <div>Answer</div>
+              <div>Lasted Update</div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                Grade
+                <SortedButton
+                  sortedPacks={sortCards}
+                  changeMethodSort={changeMethodSort}
+                />
+              </div>
+              {myID === packUserID ? <div>Actions</div> : null}
+            </div>
+            <div style={{ overflowY: 'auto', height: '350px' }}>
+              {cards.map(card => (
+                <CardItem key={card.created} card={card} />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className={classes.messageEmptyCard}>
+            This pack is empty. Click add new card to fill this pack
+          </div>
+        )}
       </div>
     </MainContainer>
   );

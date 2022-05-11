@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { loginReducer } from '../componets/Login/loginReducer';
+import { cardReducer } from '../componets/PacksList/AddNewCard/card-reducer';
 import { packItemReducer } from '../componets/PacksList/PackItem/pack-item-reducer';
 import { packsReducer } from '../componets/PacksList/packsReducer';
 
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   register: registerReducer,
   cardsPacks: packsReducer,
   cards: packItemReducer,
+  card: cardReducer,
 });
 
 export const store = createStore(
@@ -28,6 +30,3 @@ export const store = createStore(
 );
 
 export type RootState = ReturnType<typeof rootReducer>;
-
-// @ts-ignore
-window.store = store.getState();

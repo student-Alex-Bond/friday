@@ -1,0 +1,36 @@
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: #2D2E46;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btnWrapper {
+    margin-top: 70px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    color: #21268F !important;
+    width: 124px;
+    height: 36px;
+    background: #D7D8EF;
+    border-radius: 30px;
+    margin: 4px 0;
+}
+
+.btn {
+    width: 127px;
+    height: 36px;
+}
