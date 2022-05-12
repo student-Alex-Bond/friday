@@ -12,4 +12,5 @@ export type ResponseCardType = {
   cardsPack_id: string;
   question: string;
   answer: string;
-}
+  cardId: string;
+};

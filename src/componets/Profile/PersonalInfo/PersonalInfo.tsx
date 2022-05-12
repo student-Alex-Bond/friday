@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect } from 'react';
+import React, { ChangeEvent, FC, memo, useEffect } from 'react';
 
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ import changePhoto from 'assets/changePhoto/changePhoto.svg';
 import rocket from 'assets/preloader/preloader.gif';
 import { Button } from 'common/Button';
 
-const PersonalInfo: FC = () => {
+const PersonalInfo: FC = memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const status = useSelector<RootState, string>(state => state.app.status);
@@ -99,6 +99,6 @@ const PersonalInfo: FC = () => {
       </form>
     </FormContainer>
   );
-};
+});
 
 export { PersonalInfo };

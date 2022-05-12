@@ -1,28 +1,43 @@
 import React, { FC, memo } from 'react';
 
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { AddedOrEditInfo } from '../../../common/AddedOrEditInfo/AddedOrEditInfo';
 import { InputText } from '../../../common/InputText';
+import { RootState } from '../../../store';
 
-import classes from './AddNewCard.module.css';
-import { addedNewCard, setAnswer, setQuestion } from './card-reducer';
+import classes from './AddOrEditCard.module.css';
+import {
+  addedNewCard,
+  modeType,
+  setAnswer,
+  setQuestion,
+  updateCard,
+} from './card-reducer';
 
-const AddNewCard: FC = memo(() => {
+const AddOrEditCard: FC = memo(() => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const mode = useSelector<RootState, modeType>(state => state.card.mode);
+  const reduxQuestion = useSelector<RootState, string>(state => state.card.question);
+  const reduxAnswer = useSelector<RootState, string>(state => state.card.answer);
   const goBack = -1;
   const formik = useFormik({
     initialValues: {
-      question: '',
-      answer: '',
+      question: reduxQuestion,
+      answer: reduxAnswer,
     },
     onSubmit: values => {
       dispatch(setQuestion(values.question));
       dispatch(setAnswer(values.answer));
-      dispatch(addedNewCard());
+      if (mode === 'added') {
+        dispatch(addedNewCard());
+      }
+      if (mode === 'edit') {
+        dispatch(updateCard());
+      }
       navigate(goBack);
     },
   });
@@ -30,7 +45,7 @@ const AddNewCard: FC = memo(() => {
     <AddedOrEditInfo
       pathLinkCancel="/packs-list/pack-item"
       handeSubmit={formik.handleSubmit}
-      title="card info"
+      title={mode === 'edit' ? 'edit card' : 'card info'}
     >
       <div className={classes.question}>
         <InputText
@@ -60,4 +75,4 @@ const AddNewCard: FC = memo(() => {
   );
 });
 
-export { AddNewCard };
+export { AddOrEditCard };

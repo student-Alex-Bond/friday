@@ -1,11 +1,11 @@
 import React, { FC, memo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { SortedButton } from '../../../common/SortedButton';
 import { RootState } from '../../../store';
-import { setCardsPackID } from '../AddNewCard/card-reducer';
+import { setCardsPackID } from '../AddOrEditCard/card-reducer';
 import {
   setPackName,
   setPackNameID,
@@ -22,6 +22,7 @@ type TableType = {
 };
 const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sortedPacks = useSelector<RootState, string>(selectedSortPack);
   // eslint-disable-next-line no-underscore-dangle
   const myID = useSelector<RootState, string | undefined>(state => state.login.user?._id);
@@ -71,6 +72,9 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                 // eslint-disable-next-line no-underscore-dangle
                 dispatch(setCardsPackID(pack._id));
               };
+              const goEditCard = (): void => {
+                navigate('pack-item/add-new-card');
+              };
               return (
                 <tr className={classes.row} key={pack.created}>
                   <td>
@@ -99,7 +103,11 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                           >
                             Delete
                           </button>
-                          <button className={classes.btn} type="button">
+                          <button
+                            onClick={goEditCard}
+                            className={classes.btn}
+                            type="button"
+                          >
                             Edit
                           </button>
                         </>

@@ -1,12 +1,19 @@
 import React, { FC, memo, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { MyBackdrop } from '../../common/BackDrop';
 import { ModalWindow } from '../../common/ModalWindow';
 import { MyRating } from '../../common/Rating/MyRating';
 import { RootState } from '../../store';
-import { deleteCard } from '../PacksList/AddNewCard/card-reducer';
+import {
+  deleteCard,
+  setAnswer,
+  setCardID,
+  setMode,
+  setQuestion,
+} from '../PacksList/AddOrEditCard/card-reducer';
 import { CardType } from '../PacksList/PackItem/pack-item-reducer';
 import { selectedStatusApp } from '../PacksList/selectors';
 
@@ -17,15 +24,25 @@ type CardItemType = {
 };
 const CardItem: FC<CardItemType> = memo(({ card }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const status = useSelector<RootState, string>(selectedStatusApp);
   const updated = new Date(card.updated).toLocaleDateString();
   // eslint-disable-next-line no-underscore-dangle
   const myID = useSelector<RootState, string | undefined>(state => state.login.user?._id);
+  const [isShow, setIsShow] = useState<boolean>(false);
   const deleteCurrentCard = (): void => {
     // eslint-disable-next-line no-underscore-dangle
     dispatch(deleteCard(card._id));
+    setIsShow(false);
   };
-  const [isShow, setIsShow] = useState<boolean>(false);
+  const showEditPage = (): void => {
+    dispatch(setMode('edit'));
+    dispatch(setQuestion(card.question));
+    dispatch(setAnswer(card.answer));
+    // eslint-disable-next-line no-underscore-dangle
+    dispatch(setCardID(card._id));
+    navigate('add-new-card');
+  };
   return (
     <>
       <ModalWindow
@@ -37,7 +54,7 @@ const CardItem: FC<CardItemType> = memo(({ card }) => {
       >
         <span className={classes.text}>
           Do you really want to remove card
-          <strong style={{ textTransform: 'uppercase' }}>{card.question}</strong>? All
+          <strong style={{ textTransform: 'uppercase' }}> {card.question}</strong>? All
           cards will be excluded from this course.
         </span>
       </ModalWindow>
@@ -59,7 +76,7 @@ const CardItem: FC<CardItemType> = memo(({ card }) => {
             >
               Delete
             </button>
-            <button className={classes.btn} type="button">
+            <button onClick={showEditPage} className={classes.btn} type="button">
               Edit
             </button>
           </div>

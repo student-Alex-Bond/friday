@@ -73,4 +73,12 @@ export const cardsApi = {
   deleteCard(id: string) {
     return instance.delete('/cards/card', { params: { id } });
   },
+  updateCard(updateCard: ResponseCardType) {
+    const params = {
+      _id: updateCard.cardId,
+      question: updateCard.question,
+      answer: updateCard.answer,
+    };
+    return instance.put('/cards/card', { card: params });
+  },
 };

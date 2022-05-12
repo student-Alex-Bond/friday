@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { loginReducer } from '../componets/Login/loginReducer';
-import { cardReducer } from '../componets/PacksList/AddNewCard/card-reducer';
+import { cardReducer } from '../componets/PacksList/AddOrEditCard/card-reducer';
 import { packItemReducer } from '../componets/PacksList/PackItem/pack-item-reducer';
 import { packsReducer } from '../componets/PacksList/packsReducer';
 

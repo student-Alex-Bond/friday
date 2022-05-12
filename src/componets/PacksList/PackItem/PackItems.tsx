@@ -8,6 +8,7 @@ import { Button } from '../../../common/Button';
 import { InputSearch } from '../../../common/InputSearch';
 import { MainContainer } from '../../../common/MainContainer';
 import { SortedButton } from '../../../common/SortedButton';
+import { setAnswer, setMode, setQuestion } from '../AddOrEditCard/card-reducer';
 import { selectedStatusApp } from '../selectors';
 
 import {
@@ -83,11 +84,12 @@ const PackItems: FC = memo(() => {
   }, [valueSearchAnswer, valueSearchQuestion]);
 
   const addNewCard = (): void => {
+    dispatch(setQuestion(''));
+    dispatch(setAnswer(''));
+    dispatch(setMode('added'));
     navigate('add-new-card');
   };
   return (
-    // const navigate = useNavigate();
-    // const createdDate = new Date(cards.created).toLocaleDateString();
     <MainContainer>
       {status === 'loading' && <MyBackdrop />}
       <div style={{ width: '100%', padding: '30px' }}>
