@@ -41,6 +41,9 @@ const AddNewCard: FC = memo(() => {
           placeholder="enter new question"
         />
       </div>
+      <label htmlFor="questionDownload" className={classes.label}>
+        <input id="questionDownload" type="file" />+ Attach file
+      </label>
       <div className={classes.answer}>
         <InputText
           name="answer"
@@ -50,6 +53,9 @@ const AddNewCard: FC = memo(() => {
           placeholder="enter your answer"
         />
       </div>
+      <label htmlFor="answerDownload" className={classes.label}>
+        <input id="answerDownload" type="file" />+ Attach file
+      </label>
     </AddedOrEditInfo>
   );
 });

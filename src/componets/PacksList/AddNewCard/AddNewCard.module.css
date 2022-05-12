@@ -1,4 +1,13 @@
 .question, .answer{
     margin: 20px 0;
 }
+.label{
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: #21268F;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
 
