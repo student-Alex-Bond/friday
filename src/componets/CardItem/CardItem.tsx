@@ -36,7 +36,7 @@ const CardItem: FC<CardItemType> = memo(({ card }) => {
         closeWindow={() => setIsShow(false)}
       >
         <span className={classes.text}>
-          Do you really want to remove card{' '}
+          Do you really want to remove card
           <strong style={{ textTransform: 'uppercase' }}>{card.question}</strong>? All
           cards will be excluded from this course.
         </span>
