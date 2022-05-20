@@ -1,14 +1,13 @@
 .form {
-    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
+.commonMarginBottom{
+    margin: 20px 0;
+}
 .avatar {
     position: relative;
-    margin: 50px 0;
-
 }
 
 .avatar img {
@@ -22,7 +21,6 @@
     font-weight: 600;
     font-size: 22px;
     color: #2D2E46;
-    margin-top: 30px;
 }
 
 .changePhoto {
@@ -50,7 +48,6 @@ input[type="file"] {
 }
 
 .btnWrapper {
-    margin-top: 70px;
     display: flex;
     width: 100%;
     justify-content: space-between;

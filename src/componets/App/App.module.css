@@ -1,10 +1,12 @@
 .container {
     display: flex;
     justify-content: center;
-    height: 100vh;
     background: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%)
 }
 a {
     text-decoration: none;
     color: inherit;
+}
+body{
+    box-sizing: border-box;
 }

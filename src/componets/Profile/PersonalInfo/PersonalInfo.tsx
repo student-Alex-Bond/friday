@@ -47,11 +47,11 @@ const PersonalInfo: FC = memo(() => {
   return (
     <FormContainer>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
-        <h1 className={classes.title}>Personal Information</h1>
-        <div style={{ height: '64px' }}>
-          {status === 'loading' && <img src={rocket} alt="rocket" />}
-        </div>
-        <div className={classes.avatar}>
+        <h1 className={`${classes.title} ${classes.commonMarginBottom}`}>
+          Personal Information
+        </h1>
+        {status === 'loading' && <img src={rocket} alt="rocket" />}
+        <div className={`${classes.avatar} ${classes.commonMarginBottom}`}>
           <img src={avatar} alt="avatar" />
           <label htmlFor="changePhoto" className={classes.changePhoto}>
             <input
@@ -86,7 +86,7 @@ const PersonalInfo: FC = memo(() => {
             placeholder="Enter your nick"
           />
         </label>
-        <div className={classes.btnWrapper}>
+        <div className={`${classes.btnWrapper}  ${classes.commonMarginBottom}`}>
           <div className={classes.btnCancel}>
             <Link to="/">Cancel</Link>
           </div>
