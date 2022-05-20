@@ -21,6 +21,7 @@ import { Table } from '../PacksList/Table';
 import classes from './Profile.module.css';
 
 import ava from 'assets/avatar/avatar-svgrepo-com.svg';
+import iconLogout from 'assets/imgaes/logout.svg';
 import { LeftContainer } from 'common/LeftContainer';
 import { MainContainer } from 'common/MainContainer';
 import { UserType } from 'componets/Login/types';
@@ -60,10 +61,10 @@ const Profile: FC = memo(() => {
 
   return (
     <MainContainer>
-      <button className={classes.logout} type="button" onClick={logout}>
-        logout
-      </button>
       <LeftContainer>
+        <button className={classes.logout} type="button" onClick={logout}>
+          <img src={iconLogout} alt="logout" />
+        </button>
         <img className={classes.avatar} src={avatar} alt="avatar" />
         <h1 className={classes.name}>{userName}</h1>
         <span className={classes.professional}>Front-end Developer</span>
@@ -73,11 +74,13 @@ const Profile: FC = memo(() => {
       </LeftContainer>
       <div className={classes.profileContent}>
         <h1 className={classes.title}>Packs list {userName}’s</h1>
-        <InputSearch
-          initialValue=""
-          getValueSearchInput={() => {}}
-          placeholder="search"
-        />
+        <div className={classes.search}>
+          <InputSearch
+            initialValue=""
+            getValueSearchInput={() => {}}
+            placeholder="search"
+          />
+        </div>
         <div>
           <Table cardsPacks={cardsPacks} showModalDeletePack={() => {}} />
         </div>

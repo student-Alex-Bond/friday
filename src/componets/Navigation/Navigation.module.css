@@ -1,34 +1,42 @@
+.container {
+    position: relative;
+}
+
 .nav {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 25px;
+    font-size: 15px;
     display: flex;
-    width: 100vw;
-    height: 100vh;
-    justify-content: flex-start;
     flex-direction: column;
     align-items: center;
+
 }
-.nav a{
-   color: #282c34;
+
+.link {
+    color: #282c34;
     text-decoration: none;
     cursor: pointer;
+    padding: 15px 35px;
+
 }
 
-.nav  .active {
-    color: darkslateblue;
-    border-bottom: 3px solid darkslateblue;
-}
 
-.nav a:hover {
-    color: rosybrown;
-}
-.link{
+.menu {
     display: flex;
-    width:100vw;
+    width: 100vw;
     justify-content: space-around;
-    padding: 20px 0;
     margin-bottom: 20px;
+    background: #EBE0E9;
+    position: absolute;
+}
+
+.active {
+    color: darkslateblue;
+    background: #DCCCDB;
+    border-bottom: 3px solid  #21268F;
+}
+
+.content {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

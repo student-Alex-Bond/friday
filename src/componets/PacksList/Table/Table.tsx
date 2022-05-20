@@ -120,7 +120,7 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                         disabled={pack.cardsCount === zero}
                         className={btnStyle}
                         type="button"
-                        onClick={() => alert('click')}
+                        onClick={() => navigate('/profile/learn-page')}
                       >
                         Learn
                       </button>

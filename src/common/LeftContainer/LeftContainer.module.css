@@ -1,4 +1,5 @@
 .leftContainer {
+    position: relative;
     min-width: 243px;
     height:100%;
     background: #D9D9F1;

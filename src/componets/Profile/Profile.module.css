@@ -41,9 +41,19 @@
 
 .logout {
     position: absolute;
-    top: -10%;
-    right: -10%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #2D2E46;
+    top: 15px;
+    right: 15px;
     color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
 }
 .profileContent{
     padding: 40px;
@@ -52,11 +62,15 @@
     display: flex;
 }
 .title{
-    margin: 0;
+
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 33px;
     color: #2D2E46;
+    margin: 0 0 15px 0;
+}
+.search{
+    margin-bottom: 24px;
 }
