@@ -61,11 +61,7 @@ const Navigation: FC<NavigationPropsType> = () => (
           <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
           <Route key={8} path="profile/personal-info" element={<PersonalInfo />} />
           <Route key={9} path="packs-list/pack-item" element={<PackItems />} />
-          <Route
-            key={10}
-            path="packs-list/pack-item/add-new-card"
-            element={<AddOrEditCard />}
-          />
+          <Route key={10} path="pack-item/add-new-card" element={<AddOrEditCard />} />
           <Route key={11} path="profile/learn-page" element={<LearnPage />} />
         </Routes>
       </div>

@@ -1,4 +1,4 @@
-.notFound{
+.notFound {
     text-align: center;
     margin: 40px;
 }
@@ -17,15 +17,19 @@
     cursor: pointer;
     margin: 0 3px;
 }
-.btnNotAllowed{
+
+.btnNotAllowed {
     cursor: not-allowed;
 }
-.translucent:hover{
+
+.translucent:hover {
     opacity: 0.5;
 }
-.scroll-table{
+
+.scroll-table {
     margin-top: 20px;
 }
+
 .scroll-table-body {
     height: 295px;
     overflow-x: auto;
@@ -51,8 +55,7 @@
 .scroll-table tbody td {
     text-align: center;
     font-size: 14px !important;
-    vertical-align: center;
-padding: 16px 0;
+    padding: 16px 0;
 }
 
 .scroll-table tbody tr:nth-child(even) {

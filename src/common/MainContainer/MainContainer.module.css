@@ -1,5 +1,5 @@
 .mainContainer {
-    max-width: 1008px;
+    width: 1008px;
     display: flex;
     position: relative;
     background: white;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { InputText } from '../../common/InputText';
-import { RootState } from '../../store/store';
+import { RootState } from '../../store';
 
 import { AddedUserType, createUserTC } from './registerReducer';
 import classes from './Registration.module.css';
@@ -102,15 +102,11 @@ const Registration: FC = () => {
         </div>
         <div className={classes.btnContainer}>
           <div className={classes.btnCancel}>
-            <Link className={classes.btnLink} to="/profile">
+            <Link className={classes.btnLink} to="/login">
               Cancel
             </Link>
           </div>
-          <div className={classes.btnRegistration}>
-            <Button type="submit" color="#21268F">
-              Registration
-            </Button>
-          </div>
+          <Button type="submit">Registration</Button>
         </div>
       </form>
     </FormContainer>

@@ -7,25 +7,12 @@ type DefaultButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 >;
 type ButtonPropsType = DefaultButtonProps & {
-  color: string;
-  type: 'submit' | undefined;
+  type: 'submit' | 'button';
 };
 
-const Button: FC<ButtonPropsType> = ({ children, color, type, onClick }) => (
-  <div
-    style={{
-      display: 'flex',
-      height: '100%',
-      width: '100%',
-      backgroundColor: 'transparent',
-    }}
-  >
-    <button
-      type={type ? 'submit' : 'button'}
-      style={{ backgroundColor: color }}
-      className={classes.btn}
-      onClick={onClick}
-    >
+const Button: FC<ButtonPropsType> = ({ children, type, onClick }) => (
+  <div>
+    <button type={type ? 'submit' : 'button'} className={classes.btn} onClick={onClick}>
       {children}
     </button>
   </div>

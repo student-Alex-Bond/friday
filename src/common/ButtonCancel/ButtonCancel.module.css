@@ -1,0 +1,14 @@
+.btn{
+    font-family: 'SF UI Display', sans-serif;
+    background: #D7D8EF;
+    border-radius: 30px;
+    padding: 9px 37px;
+    border: none;
+    color: #21268F;
+    letter-spacing: 0.01em;
+    opacity: 0.8;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+}

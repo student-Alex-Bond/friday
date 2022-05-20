@@ -43,7 +43,6 @@ const AddOrEditCard: FC = memo(() => {
   });
   return (
     <AddedOrEditInfo
-      pathLinkCancel="/packs-list/pack-item"
       handeSubmit={formik.handleSubmit}
       title={mode === 'edit' ? 'edit card' : 'card info'}
     >

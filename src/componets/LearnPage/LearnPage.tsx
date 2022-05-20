@@ -1,6 +1,10 @@
 import React, { FC } from 'react';
 
+import { Button } from '../../common/Button';
+
 import classes from './LearnPage.module.css';
+
+import { ButtonCancel } from 'common/ButtonCancel';
 
 const LearnPage: FC = () => (
   <div className={classes.container}>
@@ -9,8 +13,8 @@ const LearnPage: FC = () => (
       Question: How &quot;This&quot; works in JavaScript?
     </span>
     <div className={classes.btn}>
-      <button type="button">Cancel</button>
-      <button type="button">Show Answer</button>
+      <ButtonCancel>Cancel</ButtonCancel>
+      <Button type="button">Show Answer</Button>
     </div>
   </div>
 );

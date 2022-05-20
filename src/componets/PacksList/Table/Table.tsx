@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { CSSProperties, FC, memo } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -77,12 +77,23 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                 dispatch(setCardsPackID(pack._id));
               };
               const goEditCard = (): void => {
-                navigate('pack-item/add-new-card');
+                navigate('/pack-item/add-new-card');
               };
+              let linkStyle: CSSProperties = {
+                pointerEvents: 'none',
+                cursor: 'not-allowed',
+              };
+              if (pack.cardsCount !== zero || myID === pack.user_id) {
+                linkStyle = {};
+              }
               return (
                 <tr className={classes.row} key={pack.created}>
                   <td>
-                    <NavLink to="/packs-list/pack-item" onClick={goCurrentPackName}>
+                    <NavLink
+                      style={linkStyle}
+                      to="/packs-list/pack-item"
+                      onClick={goCurrentPackName}
+                    >
                       {pack.name}
                     </NavLink>
                   </td>

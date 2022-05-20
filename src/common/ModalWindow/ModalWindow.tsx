@@ -38,7 +38,7 @@ const ModalWindow: FC<ModalWindowType> = ({
           </button>
           <div className={classes.btnSave}>
             <Button
-              type={undefined}
+              type="button"
               color={nameButton === 'Delete' ? 'red' : '#21268F'}
               onClick={clickActionCallback}
             >

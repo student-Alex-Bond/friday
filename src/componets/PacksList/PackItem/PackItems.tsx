@@ -117,7 +117,7 @@ const PackItems: FC = memo(() => {
           </div>
           {myID === packUserID ? (
             <div className={classes.btnAddNewCard}>
-              <Button color="#21268F" type={undefined} onClick={addNewCard}>
+              <Button type="button" onClick={addNewCard}>
                 Add new card
               </Button>
             </div>

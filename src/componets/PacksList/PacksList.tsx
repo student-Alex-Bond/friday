@@ -166,11 +166,9 @@ const PacksList: FC = memo(() => {
               initialValue={valueSearchInput}
             />
           </div>
-          <div className={classes.btnAdd}>
-            <Button color="#21268F" type={undefined} onClick={viewModal}>
-              Add new pack
-            </Button>
-          </div>
+          <Button type="button" onClick={viewModal}>
+            Add new pack
+          </Button>
         </div>
         <div className={classes.notFound}>
           {cardsPacks.length === zero && <div>You don&#39;t have decks</div>}

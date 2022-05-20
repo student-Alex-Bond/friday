@@ -43,11 +43,7 @@ const NewPassword: FC = () => {
         <span className={classes.text}>
           Create new password and we will send you further instructions to email
         </span>
-        <div className={classes.btn}>
-          <Button type="submit" color="#21268F">
-            Create new password
-          </Button>
-        </div>
+        <Button type="submit">Create new password</Button>
       </form>
     </FormContainer>
   );

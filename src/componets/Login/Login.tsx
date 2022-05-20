@@ -107,11 +107,7 @@ const Login: FC = memo(() => {
             Forgot Password
           </Link>
         </div>
-        <div className={classes.btn}>
-          <Button type="submit" color="#21268F">
-            Login
-          </Button>
-        </div>
+        <Button type="submit">Login</Button>
         <span className={classes.dontAcc}>Don&apos;t have an account?</span>
         <Link className={classes.singUp} to="/registration">
           sing Up

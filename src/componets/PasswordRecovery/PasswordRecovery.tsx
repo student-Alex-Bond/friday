@@ -53,11 +53,9 @@ const PasswordRecovery: FC = () => {
         <span className={classes.text}>
           Enter your email address and we will send you further instructions{' '}
         </span>
-        <div className={classes.btn}>
-          <Button color="#21268F" type="submit" onClick={toCheckEmail}>
-            Send Instruction
-          </Button>
-        </div>
+        <Button type="submit" onClick={toCheckEmail}>
+          Send Instruction
+        </Button>
       </form>
       <span className={classes.question}>Did you remember your password?</span>
       <Link className={classes.link} to="/login">
