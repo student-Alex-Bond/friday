@@ -1,7 +1,7 @@
 import React, { FC, memo, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { InputSearch } from '../../common/InputSearch';
 import { Pagination } from '../../common/Pagination';
@@ -28,7 +28,6 @@ import { UserType } from 'componets/Login/types';
 
 const Profile: FC = memo(() => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const cardsPacks = useSelector<RootState, CardsPackType[]>(selectedCardsPacks);
   const pageCount = useSelector<RootState, number>(selectedPageCount);
   const currentPage = useSelector<RootState, number>(selectedCurrentPage);
@@ -49,12 +48,6 @@ const Profile: FC = memo(() => {
   const logout = (): void => {
     dispatch(logoutTC());
   };
-
-  useEffect(() => {
-    if (!user) {
-      navigate('/login');
-    }
-  }, [user]);
   useEffect(() => {
     dispatch(getPacksTC());
   }, []);

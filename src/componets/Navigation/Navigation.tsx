@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import { RedirectOnLogin } from '../../common/RedirecOntLogin';
 import { LearnPage } from '../LearnPage';
 import { AddOrEditCard } from '../PacksList/AddOrEditCard/AddOrEditCard';
 
@@ -20,10 +21,26 @@ import { Registration } from 'componets/Registration';
 
 export const routes = [
   { to: '/login', component: <Login />, name: 'Login' },
-  { to: '/', component: <Profile />, name: 'Profile' },
+  {
+    to: '/',
+    component: (
+      <RedirectOnLogin>
+        <Profile />
+      </RedirectOnLogin>
+    ),
+    name: 'Profile',
+  },
   { to: '/registration', component: <Registration />, name: 'Registration' },
   { to: '/new-password', component: <NewPassword />, name: 'NewPassword' },
-  { to: '/packs-list', component: <PacksList />, name: 'PacksList' },
+  {
+    to: '/packs-list',
+    component: (
+      <RedirectOnLogin>
+        <PacksList />
+      </RedirectOnLogin>
+    ),
+    name: 'PacksList',
+  },
   {
     to: '/password-recovery',
     component: <PasswordRecovery />,
@@ -59,10 +76,42 @@ const Navigation: FC<NavigationPropsType> = () => (
             <Route key={route.to} path={route.to} element={route.component} />
           ))}
           <Route key={7} path="/password-recovery/check-email" element={<CheckEmail />} />
-          <Route key={8} path="profile/personal-info" element={<PersonalInfo />} />
-          <Route key={9} path="packs-list/pack-item" element={<PackItems />} />
-          <Route key={10} path="pack-item/add-new-card" element={<AddOrEditCard />} />
-          <Route key={11} path="profile/learn-page" element={<LearnPage />} />
+          <Route
+            key={8}
+            path="profile/personal-info"
+            element={
+              <RedirectOnLogin>
+                <PersonalInfo />
+              </RedirectOnLogin>
+            }
+          />
+          <Route
+            key={9}
+            path="packs-list/pack-item"
+            element={
+              <RedirectOnLogin>
+                <PackItems />
+              </RedirectOnLogin>
+            }
+          />
+          <Route
+            key={10}
+            path="pack-item/add-new-card"
+            element={
+              <RedirectOnLogin>
+                <AddOrEditCard />
+              </RedirectOnLogin>
+            }
+          />
+          <Route
+            key={11}
+            path="profile/learn-page"
+            element={
+              <RedirectOnLogin>
+                <LearnPage />
+              </RedirectOnLogin>
+            }
+          />
         </Routes>
       </div>
     </div>
