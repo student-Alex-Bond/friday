@@ -17,9 +17,11 @@
     cursor: pointer;
     margin: 0 3px;
 }
-
-.btn:first-child {
-
+.btnNotAllowed{
+    cursor: not-allowed;
+}
+.translucent:hover{
+    opacity: 0.5;
 }
 .scroll-table{
     margin-top: 20px;

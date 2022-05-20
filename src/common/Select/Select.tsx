@@ -26,9 +26,13 @@ const Select: FC<SelectType> = ({ numberOfPages }) => {
     <option key={optionItem}>{optionItem}</option>
   ));
   return (
-    <select className={classes.select} onChange={currentSelectIndex} value={option}>
-      {mappedOptions}
-    </select>
+    <div className={classes.container}>
+      <span className={classes.text}>show </span>
+      <select className={classes.select} onChange={currentSelectIndex} value={option}>
+        {mappedOptions}
+      </select>
+      <span className={classes.text}> card per page</span>
+    </div>
   );
 };
 

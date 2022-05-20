@@ -3,9 +3,20 @@ import React, { FC, memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { InputSearch } from '../../common/InputSearch';
+import { Pagination } from '../../common/Pagination';
+import { Select } from '../../common/Select';
 import { RootState } from '../../store';
 import { logoutTC } from '../Login/actions';
 import { selectUser } from '../Login/selectors';
+import { CardsPackType, getPacksTC } from '../PacksList/packsReducer';
+import {
+  selectedCardsCountTotalCount,
+  selectedCardsPacks,
+  selectedCurrentPage,
+  selectedPageCount,
+} from '../PacksList/selectors';
+import { Table } from '../PacksList/Table';
 
 import classes from './Profile.module.css';
 
@@ -17,6 +28,12 @@ import { UserType } from 'componets/Login/types';
 const Profile: FC = memo(() => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cardsPacks = useSelector<RootState, CardsPackType[]>(selectedCardsPacks);
+  const pageCount = useSelector<RootState, number>(selectedPageCount);
+  const currentPage = useSelector<RootState, number>(selectedCurrentPage);
+  const cardsCountTotalCount = useSelector<RootState, number>(
+    selectedCardsCountTotalCount,
+  );
   const user = useSelector<RootState, UserType | null>(selectUser);
   const currentAvatar = useSelector<RootState, string | undefined>(
     state => state.login.user?.avatar,
@@ -37,6 +54,9 @@ const Profile: FC = memo(() => {
       navigate('/login');
     }
   }, [user]);
+  useEffect(() => {
+    dispatch(getPacksTC());
+  }, []);
 
   return (
     <MainContainer>
@@ -51,6 +71,21 @@ const Profile: FC = memo(() => {
           Edit profile
         </Link>
       </LeftContainer>
+      <div className={classes.profileContent}>
+        <h1 className={classes.title}>Packs list {userName}’s</h1>
+        <InputSearch
+          initialValue=""
+          getValueSearchInput={() => {}}
+          placeholder="search"
+        />
+        <div>
+          <Table cardsPacks={cardsPacks} showModalDeletePack={() => {}} />
+        </div>
+        <div className={classes.paginator}>
+          <Pagination currentPage={currentPage} totalCount={cardsCountTotalCount} />
+          <Select numberOfPages={String(pageCount)} />
+        </div>
+      </div>
     </MainContainer>
   );
 });

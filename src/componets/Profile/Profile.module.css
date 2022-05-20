@@ -45,3 +45,18 @@
     right: -10%;
     color: black;
 }
+.profileContent{
+    padding: 40px;
+}
+.paginator{
+    display: flex;
+}
+.title{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    color: #2D2E46;
+}

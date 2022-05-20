@@ -1,5 +1,5 @@
 .leftContainer {
-    width: 243px;
+    min-width: 243px;
     height:100%;
     background: #D9D9F1;
     display: flex;

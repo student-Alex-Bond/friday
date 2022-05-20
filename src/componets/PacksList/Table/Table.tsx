@@ -59,6 +59,10 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
           <tbody>
             {cardsPacks.map(pack => {
               const createdDate = new Date(pack.created).toLocaleDateString();
+              let btnStyle = `${classes.btn}`;
+              if (pack.cardsCount === zero) {
+                btnStyle = `${classes.btn} ${classes.btnNotAllowed} ${classes.translucent}`;
+              }
               const deletePack = (): void => {
                 // eslint-disable-next-line no-underscore-dangle
                 dispatch(setParamsDeletePack({ name: pack.name, id: pack._id }));
@@ -112,7 +116,12 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                           </button>
                         </>
                       )}
-                      <button className={classes.btn} type="button">
+                      <button
+                        disabled={pack.cardsCount === zero}
+                        className={btnStyle}
+                        type="button"
+                        onClick={() => alert('click')}
+                      >
                         Learn
                       </button>
                     </div>

@@ -73,7 +73,7 @@ const Pagination: FC<PaginationType> = memo(({ currentPage, totalCount }) => {
             {pageNumber}
           </button>
         ))}
-      <div style={{ fontWeight: 'bold' }}>. . .</div>
+      <div>...</div>
       <button type="button" className={classes.pageItem}>
         {/* eslint-disable-next-line @typescript-eslint/no-magic-numbers */}
         {pages[pages.length - 1]}
