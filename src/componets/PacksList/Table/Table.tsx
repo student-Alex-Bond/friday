@@ -63,6 +63,10 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
               if (pack.cardsCount === zero) {
                 btnStyle = `${classes.btn} ${classes.btnNotAllowed} ${classes.translucent}`;
               }
+              let linkStyle: CSSProperties = {
+                pointerEvents: 'none',
+                cursor: 'not-allowed',
+              };
               const deletePack = (): void => {
                 // eslint-disable-next-line no-underscore-dangle
                 dispatch(setParamsDeletePack({ name: pack.name, id: pack._id }));
@@ -79,13 +83,14 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
               const goEditCard = (): void => {
                 navigate('/pack-item/add-new-card');
               };
-              let linkStyle: CSSProperties = {
-                pointerEvents: 'none',
-                cursor: 'not-allowed',
-              };
               if (pack.cardsCount !== zero || myID === pack.user_id) {
                 linkStyle = {};
               }
+              const goLearnPage = (id: string): void => {
+                dispatch(setPackNameID(id));
+                dispatch(setPackName(pack.name));
+                navigate('/profile/learn-page');
+              };
               return (
                 <tr className={classes.row} key={pack.created}>
                   <td>
@@ -131,7 +136,8 @@ const Table: FC<TableType> = memo(({ cardsPacks, showModalDeletePack }) => {
                         disabled={pack.cardsCount === zero}
                         className={btnStyle}
                         type="button"
-                        onClick={() => navigate('/profile/learn-page')}
+                        /* eslint-disable-next-line no-underscore-dangle */
+                        onClick={() => goLearnPage(pack._id)}
                       >
                         Learn
                       </button>

@@ -176,9 +176,7 @@ const PacksList: FC = memo(() => {
         <Table cardsPacks={cardsPacks} showModalDeletePack={showModalDeletePack} />
         <div className={classes.countPage}>
           <Pagination currentPage={currentPage} totalCount={cardsCountTotalCount} />
-          <span>Show</span>
           <Select numberOfPages={String(pageCount)} />
-          <span>Card per Page</span>
         </div>
       </div>
     </MainContainer>

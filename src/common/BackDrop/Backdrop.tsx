@@ -12,7 +12,6 @@ const MyBackdrop: FC = () => {
     <div>
       <Backdrop
         sx={{
-          position: 'absolute',
           backgroundColor: 'rgba(255,255,255, 0.7)',
           zIndex: theme => theme.zIndex.drawer + one,
         }}
